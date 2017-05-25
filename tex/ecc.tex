@@ -269,30 +269,129 @@ Uporabnik bo lahko za vsako merilno mesto pregledal porabo v obliki grafa. Podat
 
 \subsection{Nastavitev stikal za vklop/izklop merilnih mest/porabnikov:}
 
-\chapter{Načrtovanje sistema}
+\chapter{Načrtovanje merilnega sistema - Komponent}
 \thispagestyle{fancy}
 \pagenumbering{arabic}
 
-Sistem bo zgrajen iz dveh enot. 
-\begin{itemize}
-\item Merilni sistem
-\item Aplikacija
-\end{itemize}
-
-\section{Načrtovanje merilnega sistema - Komponent}
-
-\subsection{Arduino}
+\section{Arduino}
 Arduino je odprtokodna elektronska platforma zgrajena z hardwerom in softwerom ki je lahek za uporabo. Nastal je na inštitutu Ivrea Interaction Design, kot orodje za hitro izdelavo prototipov, namenjen pa je bil za študente brez predhodnega znanja elektrotehnike in programiranja. Kmalu za tem je postal zelo priljubljen in posledično se je začel razvijat. Zmore od enostavnih projektov kot so aktivacija motorja, prižiganje luči, branje senzorja pa do 3D printanja in uporabo v vgrajenih sistemih, uporabljajo ga pa tako začetniki kot tudi profesionalci. Na voljo je več verzij Arduinota, ki pa se razlikujejo predvsem v verziji mikrokontrolerja od katerega je tudi odvisno številov digitalnih in analognih vhodov in izhodov ter ceni, ki znaša od od 20 do 80 evrov. Ker je platforma kot že omenjeno odprtokodna pa seveda lahko dobimo Arduino ploščice pod drugim imenom, z enako funkcionalnostjo za veliko ceneje. Zaradi cene, razširjene uporabe platforme in obsežne dokumentacije, ki je na voljo na spletu, je bil Arduino kandidat za izdelavo naprave za diplomsko nalogo. Kasneje se je izkazalo, da je Raspberry pi nekoliko bolj     primeren.
 
-\subsection{Raspberry Pi}
+\section{Raspberry Pi}
 Kot že omenjeni Arduino je bil Raspberry Pi namenjen promoviranju in učenju osnov računalništva. Vsi modeli Raspberry Pi vsebujejo Broadcom-ov Soc(System on a chip), kateri je zgrajen iz ARM-ovega procesorja (CPU) in grafičnega procesorja GPU. Ure procesorjev so med 700MHz in 1.2GHz, pomnilnik pa varira med 256MB in 1GB RAM. Za shrambo operacijskega sistema je uporabljena Secure Digital (SD) kartica različnih velikosti. Večina ploščic ima med 1 in 4 USB vhodov, HDMI in composit video izhod, 3.5mm audio jack. Nižje razredni vhodi/izhodi so na voljo preko številnih GPIO pinov, ki podpirajo protokole kot na primer I2C. Nekatere ploščice imajo tudi Ethernet port in WIFI ter bluetooth. Deluje na operacijskem sistemu raspbian, ki je Debianova različica linuxove distribucije.
 
-\subsection{Arduino ali Raspberry Pi}
+\section{Arduino ali Raspberry Pi}
 Za razvoj merilnika za naše potrebe, razvojna ploščica Arduino zadostuje vsem zahtevam, zato je bila prva verzija merilnega instrumenta izdelana z Arduino ploščico verzijo Arduino UNO. Arduino je s pomočjo senzorjev uspešno opravljal meritve, vendar je bil nestabilen in sicer pri večkratnem zaporednem pošiljanju requestov na strežnik  je "zmrznil". Ker težave nismo uspeli odpraviti smo zato Arduino zamenjali z Raspberry Pi. Raspberry Pi se je izkazal enostavnejši za uporabo ( naprednejši jezik???? ), vendar smo pri zamenjavi naleteli na novo težavo in sicer Raspberry Pi nima analognih vhodov ( Arduino ima vgrajene analogno digitalne pretvornike na ploščici). Problem smo rešili z uporabo analogno/digitalnega pretvornika MCP3008.
 
-\subsection{Analogno digitalni pretvornik mcp3008}
+\section{Analogno digitalni pretvornik MCP3008}
 MCP3008 je nizkocenovni 8 kanalni 10 bitni analogno digitalni pretvornik. Natančnost tega čipa je podobna čipu uporabljenem na Arduino UNO. V primeru da bi kasneje želeli natančnejše meritve bi morali ta čip zamenjati za natančnejši čip na primer: ADS1015(12 bit) ali še natančnejši ADS1115(16 bit). Komunikacija med Raspberry Pi in MCP3008 poteka po SPI protokolu.
 
+\section{SPI}
+SPI(ang. Serial Peripheral Interface bus) je standard za sinhrono serijsko podatkovno povezavo, ki je uporabljena za kratke povezave. Najpogosteje je uporabljena v vgrajenih sistemih. Standard je bil razvit leta 1980, razvila pa ga je Motorola. Kmalu za tem je postal "de facto" standard. Tipično uporabo SPI vodila lahko zasledimo pri Secure Digital karticah (SD) in pri LCD zaslonih. Naprave ki uporabljajo SPI protokol, komunicirajo med seboj v dvosmernem načinu(full duplex), s principom nadrejenega/podrejenega(master/slave), z enim nadrejenim(master) in možnostjo več podrejenih(slave), katere nadrejeni izbira preko SS vodila. Včasih SPI-ju rečemo kar štiri žično serijsko vodilo, ker za svojo delovanje uporablja štiri žice.
+
+\begin{itemize}
+\item MOSI: MOSI priklop je uporabljen za prenos podatkov iz SPI modula, ko je nastavljen kot nadrejeni in za sprejem podatkov ko je nastavljen kot podrejeni.
+\item MISO: MISO priklop je uporabljen za prenos podatkov iz SPI modula, ko je nastavljen kot podrejeni in za sprejem podatkov ko je nastavljenkot nadrejeni.
+\item SS: This pin is used to output the select signal from the SPI module to another peripheral with which a data transfer is to take place when its configured as a Masterand its used as an input to receive the slave select signal when the SPI is configured as Slave.
+\item SCK: SCK priklop je uporabljen za izhod urinega signala, kateri določa takt prenosa podatkov med nadrejenim/podrejenim.
+\end{itemize}
+
+\section{Metode merjenja toka}
+Zazanavanje toka je uporabljeno za izvajanje dveh poglavitih funkcij. Meri se količina toka, ki teče skozi porabnik, kar lahko uporabimo za nadzor porabe in meri se previsok tok oziroma napake. Če tok preseže varne meje, programska ali strojna oprema lahko ustrezno reagira in izklopi delovanje naprave. Za opravljanje meritev toka poznamo veliko načinov:
+
+\begin{itemize}
+\item Resistive (direktno merjenje)
+
+\begin{itemize}
+\item Current sense resistors
+\end{itemize}
+
+ \item Magnetno (indirektno merjenje)
+
+\begin{itemize}
+\item Current transformer
+\item Rogowski coil
+\item Hall effect device
+\end{itemize}
+
+\item Transistor (direktno merjenje)
+
+\begin{itemize}
+\item RDS(ON)
+\item Ratio-metric
+\end{itemize}
+
+\end{itemize}
+
+Vsaka od metod merjenja ima prednosti in slabosti, ki so ključne ko izbiramo metodo in vrsto zenzorja, ki ga bomo uporabili
+v naši aplikaciji. Metode merjenja so razdeljene v dve glavne kategorije: direktno merjenje in indirektno merjenje.
+Direktno merjenje pomeni, da je senzor oziroma naprava za merjenje toka priključena direkno na izvor pod napetostjo, 
+indirektno merjenje pa pomeni, da je senzor oziroma naprava za merjenje toka nekako ločena od izvora napetosti, 
+kar je lahko ključno za varnost aplikacije.
+
+\subsection{Resistive}
+\subsubsection{Current Sense Resistor}
+The resistor is a direct method of current measurement that has the benefit of simplicity and linearity. The current sense resistor
+is placed in line with the current being measured and the resultant current flow causes a small amount of power to be converted
+into heat. This power conversion is what provides the voltage signal. Other than the favorable characteristics of simplicity and
+linearity, the current sense resistor is a cost-effective solution with a stable temperature coefficient of resistance (TCR) of
+< 100 ppm or 0.01  and does not suffer the potential of avalanche multiplication or thermal runaway. Additionally,
+low-resistance (< 1 m is available) metal alloy current sense products offer superior surge performance for reliable protection
+during short circuit and overcurrent events.
+
+\subsection{Magnetic}
+\subsubsection{Current Transformer}
+A current transformer (Fig. 1) provides three key advantages: isolation from line voltage; lossless current measurement; and a
+large signal voltage that can provide noise immunity. This indirect current measurement method requires a changing current -
+such as an AC, transient current, or switched DC - to provide a changing magnetic field that is magnetically coupled into the
+secondary windings. The secondary measurement voltage can be scaled according to the turns ratio between the primary and
+secondary windings. This measurement method is considered “lossless” because the circuit current passes through the copper
+windings with very little resistive losses (Fig. 2). However, a small amount of power is lost due to transformer losses from the
+burden resistor, core losses, and primary and secondary DC resistance.
+
+\subsubsection{Rogowski Coil}
+The Rogowski coil (Fig. 3) is similar to a current transformer in that a voltage is induced into a secondary coil that is proportional
+to the current flow through an isolated conductor. The difference is that the Rogowski coil is an air core design as opposed to
+the current transformer that relies upon a high-permeability core, such as a laminated steel, to magnetically couple to a
+secondary winding. The air core design has a lower inductance to provide a faster signal response and very linear signal voltage.
+Because of its design, it is often used as a temporary current measurement method on existing wiring such as a handheld meter.
+This could be considered a lower-cost alternative to the current transformer.
+
+\subsubsection{Hall Effect}
+When a current-carrying conductor is placed in a magnetic field (Fig. 4), a difference in potential occurs perpendicular to the
+magnetic field and the direction of current flow. This potential is proportional to the magnitude of the current flow. When there
+is no magnetic field and current flow exists, then there is no difference in potential. However, when a magnetic field and current
+flow exist, the charges interact with the magnetic field causing the current distribution to change, which creates the hall voltage
+(Fig. 5).
+The advantage of hall effect devices is that they are capable of measuring large currents with low power dissipation. However,
+there are numerous drawbacks that can limit their use, such as non-linear temperature drift requiring compensation, limited
+bandwidth, low-range current detection requiring a large offset voltage that can lead to error, susceptibility to external magnetic
+fields, ESD sensitivity, and high cost.
+
+\subsection{Transistor}
+\subsubsection{RDS(ON) - Drain-to-Source On-Resistance}
+Transistors are considered a “lossless” overcurrent detection method since they are standard control components to the circuit
+design and no further resistance or power dissipating devices are required to provide a control signal. Transistor datasheets
+provide the on-resistance for the drain-to-source (RDS(ON)) with a typical resistance in the m range for power MOSFETs. This
+resistance consists of several components that begin with the leads (Fig. 6) connecting to the semiconductor die through the
+resistance that makes up the numerous channel characteristics. Based on this information, the current passing through the
+MOSFET can be determined by ILoad = VRDS(ON) / RDS(ON).
+Each constituent of the RDS(ON) contributes to measurement errors that are due to minor variations in the resistances of the
+interface regions and TCR effects. The TCR effects can be partially compensated by measuring temperature and correcting the
+measured voltage with anticipated changes in resistance due to temperature. Often times the TCR for MOSFETs can be as large
+as 4000 ppm, which is equivalent to a 40  change in resistance for a 100  rise. Generally, this measurement method
+provides a signal with approximately 10  to 20  accuracy. Depending on the accuracy requirements, this may be an
+acceptable range for providing overcurrent protection.
+
+\subsection{Ratio Metric - Current Sense MOSFETs}
+The MOSFET consists of thousands of parallel transistor cells that reduce the on-resistance. The current sensing MOSFET uses
+a small portion of the parallel cells and connects to the common gate and drain, but a separate source (Fig. 7). This creates a
+second isolated transistor; a “sense” transistor. When the transistor is turned on, the current through the sense transistor will
+be a ratio comparable to the main current through the other cells.
+Depending on the transistor product, the accuracy tolerance range can vary from as low as 5  to as wide as 15  or 20 .
+This is generally not suitable for current control applications that typically require 1  measurement accuracy, but is intended
+for overcurrent and short circuit protection.
+
+\section{Senzor ACS712}
 
 
 
