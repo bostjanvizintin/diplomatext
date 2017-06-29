@@ -45,7 +45,7 @@ Zaključna naloga\\
 \noindent Računalništvo in informatika:
 % v zgornjo vrstico dopišite ime študijskega programa
 \\
-\noindent Tatjana Zrimec:
+\noindent Docent Peter Rogelj:
 % v zgornjo vrstico dopišite akademski naziv, ime in priimek mentorja
 \\
 %\noindent Somentor:
@@ -56,7 +56,7 @@ Zaključna naloga\\
 
 \vspace{4cm}
 \begin{center}
-\large \textbf{Koper, Avgust 2016}
+\large \textbf{Koper, Avgust 2017}
 % dopišite mesec in leto oddaje zaključne naloge
 \end{center}
 \newpage
@@ -172,31 +172,27 @@ Tu opišemo problem, ki ga v zaključni nalogi obravnavamo. Predstavimo osnovne 
 osnovne definicije in oznake. V uvodu lahko tudi povzamemo matematična dejstva, ki jih bomo
 kasneje uporabili. Citiramo literaturo, ki je relevantna za obravnavane pojme, lahko tudi dodatno literaturo.
 
-\chapter{Definicija problema}
+\section{Definicija problema}
 \thispagestyle{fancy}
 \pagenumbering{arabic}
 
 Poraba električne energije v gospodinjstvih narašča in je v letu 2010 znašala približno 3.5 kWh na povprečno gospodinjstvo. Narašča tudi delež gospodinjstev opremljenih z dobrinami, ki za svoje delovanje potrebujejo elektriko. Na primer pomivalni stroj, stroj za sušenje perila, mobilni telefon, CD naprave, mikrovalovna pečica ter osebni računalnik. Kljub izboljšanju energetske učinkovitosti nekaterih naprav se poraba elektrike v povprečju ne znižuje, saj število naprav v gospodinjstvih narašča. Ker gospodinjstva porabijo tretjino skupne električne energije(http://shrinkthatfootprint.com/how-do-we-use-electricity), bi lahko z majhno spremembo porabe v posameznih gpospodinjstvih veliko vplivali na skupno porabo električne energije. Gospodinjstva redno prejemajo račune za količino porabljene električne energije vendar uporabniku skupna poraba električne energije ne koristi pri predstavi, kje v gospodijstvu bi lahko porabo omejil. Ideja je torej načrtovati in izdelati tak sistem, ki bi uporabnikom omogočal natančnejši nadzor porabe električne energije in s tem prikazal možnosti zmanjšanja električne energije.
 
-\chapter{Rešitev problema}
+\section{Rešitev problema}
 \thispagestyle{fancy}
 \pagenumbering{arabic}
 
 Porabo električne energije v gospodinjstvih lahko zmanjšamo, vendar je to veliko enostavneje, če imamo natančen vpogled v porabo posameznih električnih naprav, ki si jih lasti gospodinjstvo. Glavna funkcija sistema bi torej bila nadzor porabe električne energije. Uporabniki bi lahko sami določili merilne točke in tako natačno izmerili porabo električne energije na posameznih merilnih mestih. Točna poraba bi bila nato prikazana za posamezna merilna mesta v obliki grafa. Poleg nadzora porabe, bi si lahko uporabniki določili različna opozorila. Sistem bi jih glede na opozorila opozarjal na preveliko uporabo oziroma na prekoračitev porabe električne energije in imel možnosti izklopa porabnikov v primeru sprožitve opozorila. Za lažjo predstavo o količini porabljene električne energije bi sistem omogočal tudi primerjavo porabe električne energije med seboj podobnimi gospodinjstvi.
 
-\chapter{Težave}
+\section{Težave}
 \thispagestyle{fancy}
 \pagenumbering{arabic}
 
 Ena od težav, ki nastopi pri merjenju porabe električne energije je montaža merilcev. Ker povprečno gospodinjstvo ne obvlada elektronike, bi morali biti merilci enostavni za montažo, sicer bi vsako montažo moral opraviti strokovnjak kar bi povečalo stroške in tako odvrnilo zanimanje s strani uporabnikov. Težave nastopijo tudi zaradi velike količine podatkov, ki jih merilne naprave konstantno pošiljajo na strežnik. 
 
-\chapter{Ekonomska izvedljivost}
+\section{Študija izvedljivosti}
 \thispagestyle{fancy}
 \pagenumbering{arabic}
-
-Ena od omenjenih težav je velika količina podatkov ki se konstantno pošilja na strežnik, kar pomeni da bi strežnik moral biti zelo zanesljiv, saj igra ključno vlogo v sistemu. Taki strežniki lahko predstavljajo velik strošek, zato je nujno potreben nekakšen prihodek s strani uporabnikov sistema. Sistem bi zato omogočal prosto verzijo in plačljivo verzijo, katera nebi imela nekaterih omejitev ki bi jih imela prosta verzija. 
-Poleg strežnika je potrebno načrtovanje in izdelava merilcev, za kar bi potrebovali nekaj začetnega kapitala. 
-Pri izdelavi prototipa merilca in spletne aplikacije za diplomsko nalogo so stroški zanemarljivi, saj bomo za izdelavo merilca uporabili razvijalno ploščico arduino, ter njemu kompatibilne senzorje, za strežnik pa bo zadostoval navaden osebni računalnik.
 
 \chapter{Analiza in definiranje zahtev}
 \thispagestyle{fancy}
@@ -204,10 +200,10 @@ Pri izdelavi prototipa merilca in spletne aplikacije za diplomsko nalogo so stro
 
 Sistem za nadzor porabe električne energije bo na voljo vsem uporabnikom, ki bi želeli natančnejši pogled svoje porabe električne energije in tako potencialno zmanjšati porabo, kjer je to le možno. Sistem bo podpiral dve vrsti uporabnikov:
 \begin{itemize}
-\item Proste uporabnike
-\item Plačljive uporabnike
+\item Osnovne uporabnike
+\item Nadgrajene uporabnike
 \end{itemize}
-Funkcije sistema bodo enake za vse uporabnike z razliko, da bodo imeli prosti uporabniki nekaj omejitev pri nekaterih funkcijah kot na primer:
+Funkcije sistema bodo enake za vse uporabnike z razliko, da bodo imeli osnovni uporabniki nekaj omejitev pri nekaterih funkcijah kot na primer:
 \begin{itemize}
 \item Omejeno število meritev posameznega merilnega mesta na dan (manj natančna poraba)
 \item Omejeno število dni hranjenja starih meritev
@@ -220,7 +216,7 @@ Funkcije sistema bodo enake za vse uporabnike z razliko, da bodo imeli prosti up
 \thispagestyle{fancy}
 \pagenumbering{arabic}
 
-\subsection{Funkcijske zahteve sistema:}
+\subsection{Funkcijske zahteve merilca:}
 \begin{itemize}
 
 \item Registracija uporabnika v sistem
@@ -269,7 +265,37 @@ Uporabnik bo lahko za vsako merilno mesto pregledal porabo v obliki grafa. Podat
 
 \subsection{Nastavitev stikal za vklop/izklop merilnih mest/porabnikov:}
 
-\chapter{Načrtovanje merilnega sistema - Komponent}
+\subsection{Funkcijske zahteve portala:}
+
+
+\section{Nefunkcijske zahteve}
+\thispagestyle{fancy}
+\pagenumbering{arabic}
+
+\subsection{Nefunkcijske zahteve merilca:}
+
+\begin{itemize}
+
+\item Disaster recovery
+\item maintability
+\item price
+\item portability
+\item safety
+\item security
+
+\end{itemize}
+
+
+
+
+\subsection{Nefunkcijske zahteve portala:}
+
+
+\chapter{Načrtovanje sistema}
+\thispagestyle{fancy}
+\pagenumbering{arabic}
+
+\section{Načrtovanje merilca}
 \thispagestyle{fancy}
 \pagenumbering{arabic}
 
@@ -451,8 +477,9 @@ SLIKA ENAČBE
 SLIKA KODE IN OBRAZLOŽITEV.
 
 
-
-\chapter{Načrtovanje aplikacije}
+\section{Načrtovanje portala}
+\thispagestyle{fancy}
+\pagenumbering{arabic}
 
 \section{HTTP protokol}
 The Hypertext Transfer Protocol (HTTP) is an application-level
@@ -545,19 +572,6 @@ BOOK: GETTING STARTED WITH LARAVEL
 \medskip
 Minimiziranje pasovnosti matrik pomaga pri njihovem shranjevanju in pri računanju z njimi, npr.~pri Gaussovi eliminaciji. Bralec bo podrobnosti našel v~\cite{Chinn, George, Strang}.
 
-
-\chapter{Vložitve}
-\thispagestyle{fancy}
-
-Dodamo vezno besedilo.
-
-\section{Široke vložitve}\label{siroke}
-
-Dodamo vezno besedilo.
-
-\subsection{Podpoglavje poglavja Široke vložitve}
-
-Dodamo vezno besedilo.
 
 \begin{defi}
 Graf $G$ je {\em povezan}, če za vsaki dve točki $u,v\in V(G)$ obstaja vsaj ena $u$-$v$ pot v $G$.
