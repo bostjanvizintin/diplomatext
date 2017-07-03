@@ -1,5 +1,6 @@
 \documentclass[12pt,a4paper,titlepage,openany]{report}
 \usepackage{zakljucna_FAMNIT_1_stopnja_MA_MEF_2016}
+\usepackage{float}
 
 % Glava dokumenta:
 
@@ -45,7 +46,7 @@ Zaključna naloga\\
 \noindent Računalništvo in informatika:
 % v zgornjo vrstico dopišite ime študijskega programa
 \\
-\noindent Docent Peter Rogelj:
+\noindent Prof. dr.  Peter Rogelj:
 % v zgornjo vrstico dopišite akademski naziv, ime in priimek mentorja
 \\
 %\noindent Somentor:
@@ -213,6 +214,13 @@ Funkcije sistema bodo enake za vse uporabnike z razliko, da bodo imeli osnovni u
 
 \subsection{Funkcijske zahteve merilca:}
 
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=1\linewidth]{Slike/ActivityMerilec.png}
+\end{center}
+\caption{Diagram aktivnosti za merilec.}\label{slika:ActivityMerilec}
+\end{figure}
+
 \begin{itemize}
 \item Poizvedba nastavitev senzorjev
 \item Beleženje porabe
@@ -221,12 +229,27 @@ Funkcije sistema bodo enake za vse uporabnike z razliko, da bodo imeli osnovni u
 \end{itemize}
 
 \subsubsection{Poizvedba nastavitev senzorjev:}
-\subsubsection{Beleženje porabe:}
+Merilec bo imel zadnjo kopijo nastavitev shranjeno lokalno, zato da bo v primeru ko komunikacija med centralno enoto in merilcem ne bo vzpostavljena, lahko še vedno opravljal meritve. 
+Ob vsakem zagonu, pred pričetkom opravljanja meritev, bo merilec poizkusil poslati zahtevo na centralno enoto, s svojim identifikacijskim nizom. V primeru da odgovora ne bo dobil, bo uporabil nastavitve, ki jih ima shranjene lokalno in si zabeležil napako(povezava s centralno enoto ni uspela). V primeru odgovora pa bo nastavitve posodobil in uporabil posodobljene nastavitve. 
+
+\subsubsection{Opravljanje meritev:}
+Glede na pridobljene nastavitve, bo merilec moral periodično opravljati meritve, za vsako merilno mesto posebej. 
 \subsubsection{Poročanje rezultatov meritev:}
+Po preteku periode, ki bo določena s strani posameznega uporabnika, bo merilec moral poslati meritve na centralno enoto. 
 \subsubsection{Okrevanje po napaki:}
+Vsaka napaka se bo beležila na merilcu  in se bo ob prvi možnosti posredovala na centralno enoto, kjer bo uporabnik imel pregled nad vsemi napakami. Po napaki pa mora merilec nadaljevati z opravljanjem meritev. Ena od napak je nedostopnost centralne enote. V tem primeru bo merilec uporabil lokalno kopijo nastavitev, vrednosti meritev pa bo shranjeval lokalno, dokler povezava s centralno enoto ne bo vzpostavljena. 
+
+Drugi problem je izpad elektrike. V tem primeru se bo merilec izklopil, ob vzpostavitvi elektrike pa se mora merilec sam zagnati, ter pognati program za opravljanje meritev.
 
 
 \subsection{Funkcijske zahteve aplikacije:}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=1\textwidth, height=0.9\textheight,keepaspectratio]{Slike/ActivityPoraba.png}
+\end{center}
+\caption{Diagram aktivnosti za pregled porabe.}\label{slika:ActivityPoraba}
+\end{figure}
 
 \begin{itemize}
 \item Vnos novega merilca
@@ -241,13 +264,13 @@ Funkcije sistema bodo enake za vse uporabnike z razliko, da bodo imeli osnovni u
 \end{itemize}
 
 \subsubsection{Vnos novega merilca:}
-Na portalu bomo po pritisku gumba za vnos novega merilca preusmerjeni na formo za vnos novih merilcev. Na tej formi bo uporabnik lahko vnesel id merilca, ime merilca preko katerega ga bo lažje prepoznal in številko senzorjev, ki jih bo prikjučil na merilec. Po vnosu merilca, se bo ta prikazal v meniju, kjer bo po pritisku na njega uporabnika preusmerilo na stran za urejanje nastavitev merilca ter senzorjev, ki so na njega priključeni.
+Na portalu bomo po pritisku gumba za vnos novega merilca preusmerjeni na formo za vnos novih merilcev. Vnos merilca mora uporabniku preko enostavnih vnosnih polj omogočati vnos novega merilca. Za vno novega merilca bo potreben vnos imena, identifikacijskega niza in števila priključenih senzorjev. Po vnosu merilca, se bo ta prikazal v meniju, kjer bo uporabnika po pritisku na merilec, preusmerilo na stran za urejanje nastavitev merilca ter senzorjev, ki so na njega priključeni.
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=1\linewidth]{Slike/VnosNovegaMerilca.png}
 \end{center}
-\caption{Vnos novega merilca.}\label{slika:acs}
+\caption{Vnos novega merilca.}\label{slika:VnosNovegaMerilca}
 \end{figure}
 
 \subsubsection{Urejanje in konfiguracija vnešenih merilcev:}
@@ -285,66 +308,67 @@ Vnos trajanja vzorčenja signala posameznega senzorja.
 \end{itemize}
 
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=1\linewidth]{Slike/UrejanjeMerilca.png}
 \end{center}
-\caption{Vnos novega merilca.}\label{slika:acs}
+\caption{Nastavitve merilca.}\label{slika:UrejanjeMerilca}
 \end{figure}
 
 \subsubsection{Pregled porabe električne energije po merilnih mestih z možnostjo različnih filtrov:}
-Na portalu bomo po pritisku gumba za pregled meritev preusmerjeni na formo za izbiro parametrov pri pregledu porabe. Uporabnik bo lahko izbiral med vsemi svojimi merilci, za vsak merilec pa bo označil samo tista merilna mesta oziroma senzorje, za katere bo želel videti porabo. Z vnosom datumov in ur bo omejil prikaz porabe na točno določeno obdobje, z izbiro intervala pa bo izbral razdaljo med točkami prikaza porabe na grafu (npr. po minutah, urah, ...). Na koncu bo možnost izbire še med prikazom moči v določeni točki in med skupno porabo.
+Na portalu bomo po pritisku gumba za pregled meritev preusmerjeni na formo za izbiro parametrov pri pregledu porabe. Uporabnik bo lahko izbiral med vsemi svojimi merilci, za vsak merilec pa bo označil samo tista merilna mesta oziroma senzorje, za katere bo želel videti porabo. Z vnosom datumov in ur bo omejil prikaz porabe na točno določeno obdobje, z izbiro intervala pa bo izbral razdaljo med točkami prikaza porabe na grafu (npr. po minutah, urah, ...). Možna bo tudi izbira prikaza porabe po trenutni moči ali pa skupni porabi.
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=1\linewidth]{Slike/IzbiraPregledaPorabe.png}
 \end{center}
-\caption{Vnos novega merilca.}\label{slika:acs}
+\caption{Filter pregleda porabe.}\label{slika:IzbiraPregledaPorabe}
 \end{figure}
 
 \subsubsection{Pregled porabe posameznega senzorja "v živo":}
 Po vnosu vseh želenih parametrov za prikaz porabe, bo uporabnik preusmerjen na stran, kjer bo graf, ki bo prikazoval porabo za vse izbrane senzorje, glede na izbrane parametre. Možen bo izklop prikaza porabe za posamezna merilna mesta, zato da bojo ostala merilna mesta lažje vidna. S pritiskom na ime merilnega mesta pa bo uporabnika preusmerilo na graf, kjer bo prikazana poraba samo izbranega senzorja, ta pa se bo osveževala vakokrat ko bo centralna enota prejela novo meritev za izrani senzor.
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=1\linewidth]{Slike/PregledPorabe.png}
 \end{center}
-\caption{Vnos novega merilca.}\label{slika:acs}
+\caption{Pregled porabe.}\label{slika:PregledPorabe}
 \end{figure}
 
 \subsubsection{Dodajanje novih opozoril:}
 Na portalu bomo po pritisku gumba za vnos opozoril preusmerjeni na formo za vnos novih opozoril. Uporabnik bo vnesel ime opozorila, izbral merilec in merilno mesto, nastavil vrednost, pri kateri želi da se opozorilo sproži ter izbral obdobje, med katerim bo opozorilo veljavno.
 
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=1\linewidth]{Slike/DodajOpozorilo.png}
 \end{center}
-\caption{Vnos novega merilca.}\label{slika:acs}
+\caption{Dodajanje novega opozorila.}\label{slika:DodajOpozorilo}
 \end{figure}
 
 \subsubsection{Urejanje vnesenih opozoril:}
 Po izbiri že vnesenega opozorila bo uporabnika preusmerilo na formo kjer bo lahko uporabnik uredil podatke ki jih je vnašal pri vnosu tega opozorila.
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=1\linewidth]{Slike/UrediOpozorilo.png}
 \end{center}
-\caption{Vnos novega merilca.}\label{slika:acs}
+\caption{Urejanje opozorila.}\label{slika:UrediOpozorilo}
 \end{figure}
 
 \subsubsection{Pregled napak in opozoril sistema:}
 Na portalu bomo po pritisku gumba za pregled opozoril preusmerjeni na stran, kjer se bojo prikazovale napake sistema/merilcev in opozorila uporabnika. 
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=1\linewidth]{Slike/PregledOpozorilInNapak.png}
 \end{center}
-\caption{Vnos novega merilca.}\label{slika:acs}
+\caption{Pregled opozoril in napak.}\label{slika:PregledOpozorilInNapak}
 \end{figure}
 
 
 \subsubsection{Nadgradnja uporabnika v nadgrajenega uporabnika:}
+
 \subsubsection{Pregled navodil za uporabo:}
 
 \section{Nefunkcijske zahteve}
@@ -380,6 +404,12 @@ Na portalu bomo po pritisku gumba za pregled opozoril preusmerjeni na stran, kje
 \chapter{Načrtovanje sistema}
 \thispagestyle{fancy}
 
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=1\linewidth]{Slike/NacrtSistema.png}
+\end{center}
+\caption{Načrt sistema.}\label{slika:NacrtSistema}
+\end{figure}
 
 \section{Načrtovanje merilca}
 \thispagestyle{fancy}
@@ -510,11 +540,11 @@ Senzor ki smo ga mi izbrali je ACS712.
 
 SLIKA ČIPA
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=0.5\linewidth]{Slike/ACS712.jpg}
 \end{center}
-\caption{Vhodni podatki.}\label{slika:acs}
+\caption{ACS712.}\label{slika:ACS712}
 \end{figure}
 
 Senzor obstaja v treh različicah in sicer:
@@ -551,7 +581,7 @@ http://www.electronics-tutorials.ws/accircuits/rms-voltage.html
 http://mathworld.wolfram.com/Root-Mean-Square.html
 
 
-\subsection{Merjenje izmeničnega toka s senzorjem}
+\subsection{Hitrost vzorčenja:}
 Eden od problemov pri merjenu izmeničnega toka je ta, da senzor meri samo trenutno vrednost. Ker je merjeni signal(izmenični) sinusne oblike, to pomeni da bi lahko za enak porabnik, izmeril več različnih vrednosti, odvisno od časa opravljene meritve.
 
 SLIKA SINUSA Z OZNAČENIMI MERITVAMI KI KAŽEJO DRUGAČNE VREDNOSTI.
