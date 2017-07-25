@@ -175,7 +175,7 @@ Tu se zahvalimo sodelujočim pri zaključni nalogi, osebam ali ustanovam, ki so 
 
 Poraba električne energije v gospodinjstvih narašča in je v letu 2010 znašala približno 3.5 kWh na povprečno gospodinjstvo. Narašča tudi delež gospodinjstev opremljenih z dobrinami, ki za svoje delovanje potrebujejo elektriko. Na primer pomivalni stroj, stroj za sušenje perila, mobilni telefon, CD naprave, mikrovalovna pečica ter osebni računalnik. Kljub izboljšanju energetske učinkovitosti nekaterih naprav se poraba elektrike v povprečju ne znižuje, saj število naprav v gospodinjstvih narašča. Ker gospodinjstva porabijo tretjino skupne električne energije(http://shrinkthatfootprint.com/how-do-we-use-electricity), bi lahko z majhno spremembo porabe v posameznih gpospodinjstvih veliko vplivali na skupno porabo električne energije. Gospodinjstva redno prejemajo račune za količino porabljene električne energije vendar uporabniku skupna poraba električne energije ne koristi pri predstavi, kje v gospodijstvu bi lahko porabo omejil. Ideja je torej načrtovati in izdelati tak sistem, ki bi uporabnikom omogočal natančnejši nadzor porabe električne energije in s tem prikazal možnosti zmanjšanja električne energije.
 
-\section{Rešitev problema}
+\section{Predlog rešitve}
 \thispagestyle{fancy}
 
 
@@ -197,10 +197,10 @@ Ena od težav, ki nastopi pri merjenju porabe električne energije je montaža m
 \begin{center}
 \includegraphics[width=1\textwidth, height=0.9\textheight,keepaspectratio]{Slike/UseCase.png}
 \end{center}
-\caption{Use case diagram.}\label{slika:UseCase}
+\caption{Diagram primera uporabe.}\label{slika:UseCase}
 \end{figure}
 
-
+\newpage
 Sistem za nadzor porabe električne energije bo na voljo vsem uporabnikom, ki bi želeli natančnejši pogled svoje porabe električne energije in tako potencialno zmanjšati porabo, kjer je to le možno. Sistem bo podpiral dve vrsti uporabnikov:
 \begin{itemize}
 \item Osnovne uporabnike
@@ -221,12 +221,6 @@ Funkcije sistema bodo enake za vse uporabnike z razliko, da bodo imeli osnovni u
 
 \subsection{Funkcijske zahteve merilca:}
 
-\begin{figure}[H]
-\begin{center}
-\includegraphics[width=1\linewidth]{Slike/ActivityMerilec.png}
-\end{center}
-\caption{Diagram aktivnosti za merilec.}\label{slika:ActivityMerilec}
-\end{figure}
 
 \begin{itemize}
 \item Poizvedba nastavitev senzorjev
@@ -249,14 +243,17 @@ Vsaka napaka se bo beležila na merilcu  in se bo ob prvi možnosti posredovala 
 Drugi problem je izpad elektrike. V tem primeru se bo merilec izklopil, ob vzpostavitvi elektrike pa se mora merilec sam zagnati, ter pognati program za opravljanje meritev.
 
 
-\subsection{Funkcijske zahteve aplikacije:}
-
 \begin{figure}[H]
 \begin{center}
-\includegraphics[width=1\textwidth, height=0.9\textheight,keepaspectratio]{Slike/ActivityPoraba.png}
+\includegraphics[width=1\linewidth]{Slike/ActivityMerilec.png}
 \end{center}
-\caption{Diagram aktivnosti za pregled porabe.}\label{slika:ActivityPoraba}
+\caption{Diagram aktivnosti za merilec.}\label{slika:ActivityMerilec}
 \end{figure}
+
+
+\subsection{Funkcijske zahteve aplikacije:}
+
+
 
 \begin{itemize}
 \item Vnos novega merilca
@@ -323,6 +320,15 @@ Vnos trajanja vzorčenja signala posameznega senzorja.
 \end{figure}
 
 \subsubsection{Pregled porabe električne energije po merilnih mestih z možnostjo različnih filtrov:}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=1\textwidth, height=0.9\textheight,keepaspectratio]{Slike/ActivityPoraba.png}
+\end{center}
+\caption{Diagram aktivnosti za pregled porabe.}\label{slika:ActivityPoraba}
+\end{figure}
+
+
 Na portalu bomo po pritisku gumba za pregled meritev preusmerjeni na formo za izbiro parametrov pri pregledu porabe. Uporabnik bo lahko izbiral med vsemi svojimi merilci, za vsak merilec pa bo označil samo tista merilna mesta oziroma senzorje, za katere bo želel videti porabo. Z vnosom datumov in ur bo omejil prikaz porabe na točno določeno obdobje, z izbiro intervala pa bo izbral razdaljo med točkami prikaza porabe na grafu (npr. po minutah, urah, ...). Možna bo tudi izbira prikaza porabe po trenutni moči ali pa skupni porabi.
 
 \begin{figure}[H]
@@ -376,7 +382,11 @@ Na portalu bomo po pritisku gumba za pregled opozoril preusmerjeni na stran, kje
 
 \subsubsection{Nadgradnja uporabnika v nadgrajenega uporabnika:}
 
+????????????????????
+
 \subsubsection{Pregled navodil za uporabo:}
+
+Na portalu bomo po pritisku gumba za navodila preusmerjeni na stran kjer bojo zapisana navodila za priklop senzorja, razne informacije in opisi možnih nastavitev senzorjev ter opis uporabe spletnega portala.
 
 \section{Nefunkcijske zahteve}
 \thispagestyle{fancy}
@@ -391,20 +401,35 @@ Na portalu bomo po pritisku gumba za pregled opozoril preusmerjeni na stran, kje
 \end{itemize}
 
 \subsubsection{Varnost:}
+
+Pri uporabi merilca moramo biti pozorni na dve stvar, ki predstavljajo problem z varnostjo. Prvi problem predstavlja upravljanje z visoko napetostjo, ki je lahko usodna. Drugi problem je varovanje podatkov o uporabniku in meritvah.
+
+\begin{itemize}
+\item Visoka napetost
+
+Na največji problem pri varnosti naletimo pri priklopu merilca na posamezne porabnike. Ker uporabljamo senzor, ki za svoje delovanje zahteva direkten priklop na porabnike, lahko pri priklopu pridemo v neposreden stik z električno napetostjo, kar je lahko usodno. Problem je torej da mora uporabnik prerezato žico, odstranit izolacijo in porabnik priključiti v senzor. Problem lahko delno rešimo z uporabo drugačnih senzorjev, na primer senzorji ki za svoje delovanje ne potrebujejo direktnega priklopa. En primer je ZGORAJ OMENJENI SENZOR, ki za svoje delovanje potrebuje samo žico porabnika, ki je speljana skozi tuljavico. Nevarnost za neposreden stik bi s takim senzorjem nekoliko zmnjšali, vendar še vedno obstaja nevarnost, zato bi uporabnikom brez znanja na tem področju, merilno napravo moral namestiti strokovnjak. Za priklope na enostavnejše porabnike pa bi izdelali senzorje ki bi bili vgrajeni v "adapter" za električne vtičnice ali celo razdelilce.
+
+\item Varovanje podatkov
+
+Merilna naprava konstantno pošilja veliko količino meritev na centralno enoto. Pozorni moramo biti na možnost, da bi lahko ljudje s slabimi nameni simulirali merilce uporabnikov in tako pošiljali napačne podatke na centralno enoto, kar bi se opazilo kot napačno porabo. Problem lahko rešimo z uporabo varnega protokola HTTPS pri pošiljanju meritev iz merilca na centralno enoto.
+
+\end{itemize}
+
+
 \subsubsection{Cena:}
+
+Cena merilca mora biti ugodna, saj je glavna ideja sistema znižanje stroškov porabe električne energije, torej bi visoka cena odvrnila uporabnike, saj bi samo nakup sistema za opravljanje meritev povečal stroške. Merilec mora biti tudi do velike mere prilagodljiv na uporabnikove zahteve, tako bo lahko uporabnik, ki želi opravljati meritve le na malem številu porabnikov, kupil merilec z manj senzorji, kar bi pomenilo manjši strošek.
+
 \subsubsection{Prenosljivost:}
+
+Velikost merilca je pomembna saj mora biti merilec prenosljiv, zato da ga lahko uporabnik uporablja na željenih mestih. Velikost merilca igra vlogo tudi zaradi možnosti montaže na mesta, ki niso bila izdelana z namenom proklopa dodatne opreme npr. škatla z varovalkami. 
 
 \subsection{Nefunkcijshe zahteve aplikacije:}
 
-\begin{itemize}
 
-\item Registracija uporabnika v sistem
-\item Prijava uporabnika v sistem
-\end{itemize}
+\subsubsection{Registracija/prijava uporabnika v sistem:}
 
-\subsubsection{Registracija uporabnika v sistem:}
-\subsubsection{Prijava uporabnika v sistem:}
-
+Sistem mora podpirati registracijo novih uporabnikov in prijavo že registriranih uporabnikov, zaradi varovanja podatkov in pa tudi zaradi shrambe nastavitev merilcev, saj mora sistem vedeti katere nastavitve spadajo k določenemu senzorju.
 
 
 
@@ -420,29 +445,6 @@ Na portalu bomo po pritisku gumba za pregled opozoril preusmerjeni na stran, kje
 
 \section{Načrtovanje merilca}
 \thispagestyle{fancy}
-
-
-\subsection{Arduino}
-Arduino je odprtokodna elektronska platforma zgrajena z hardwerom in softwerom ki je lahek za uporabo. Nastal je na inštitutu Ivrea Interaction Design, kot orodje za hitro izdelavo prototipov, namenjen pa je bil za študente brez predhodnega znanja elektrotehnike in programiranja. Kmalu za tem je postal zelo priljubljen in posledično se je začel razvijat. Zmore od enostavnih projektov kot so aktivacija motorja, prižiganje luči, branje senzorja pa do 3D printanja in uporabo v vgrajenih sistemih, uporabljajo ga pa tako začetniki kot tudi profesionalci. Na voljo je več verzij Arduinota, ki pa se razlikujejo predvsem v verziji mikrokontrolerja od katerega je tudi odvisno številov digitalnih in analognih vhodov in izhodov ter ceni, ki znaša od od 20 do 80 evrov. Ker je platforma kot že omenjeno odprtokodna pa seveda lahko dobimo Arduino ploščice pod drugim imenom, z enako funkcionalnostjo za veliko ceneje. Zaradi cene, razširjene uporabe platforme in obsežne dokumentacije, ki je na voljo na spletu, je bil Arduino kandidat za izdelavo naprave za diplomsko nalogo. Kasneje se je izkazalo, da je Raspberry pi nekoliko bolj     primeren.
-
-\subsection{Raspberry Pi}
-Kot že omenjeni Arduino je bil Raspberry Pi namenjen promoviranju in učenju osnov računalništva. Vsi modeli Raspberry Pi vsebujejo Broadcom-ov Soc(System on a chip), kateri je zgrajen iz ARM-ovega procesorja (CPU) in grafičnega procesorja GPU. Ure procesorjev so med 700MHz in 1.2GHz, pomnilnik pa varira med 256MB in 1GB RAM. Za shrambo operacijskega sistema je uporabljena Secure Digital (SD) kartica različnih velikosti. Večina ploščic ima med 1 in 4 USB vhodov, HDMI in composit video izhod, 3.5mm audio jack. Nižje razredni vhodi/izhodi so na voljo preko številnih GPIO pinov, ki podpirajo protokole kot na primer I2C. Nekatere ploščice imajo tudi Ethernet port in WIFI ter bluetooth. Deluje na operacijskem sistemu raspbian, ki je Debianova različica linuxove distribucije.
-
-\subsection{Arduino ali Raspberry Pi}
-Za razvoj merilnika za naše potrebe, razvojna ploščica Arduino zadostuje vsem zahtevam, zato je bila prva verzija merilnega instrumenta izdelana z Arduino ploščico verzijo Arduino UNO. Arduino je s pomočjo senzorjev uspešno opravljal meritve, vendar je bil nestabilen in sicer pri večkratnem zaporednem pošiljanju requestov na strežnik  je "zmrznil". Ker težave nismo uspeli odpraviti smo zato Arduino zamenjali z Raspberry Pi. Raspberry Pi se je izkazal enostavnejši za uporabo ( naprednejši jezik???? ), vendar smo pri zamenjavi naleteli na novo težavo in sicer Raspberry Pi nima analognih vhodov ( Arduino ima vgrajene analogno digitalne pretvornike na ploščici). Problem smo rešili z uporabo analogno/digitalnega pretvornika MCP3008.
-
-\subsection{Analogno digitalni pretvornik MCP3008}
-MCP3008 je nizkocenovni 8 kanalni 10 bitni analogno digitalni pretvornik. Natančnost tega čipa je podobna čipu uporabljenem na Arduino UNO. V primeru da bi kasneje želeli natančnejše meritve bi morali ta čip zamenjati za natančnejši čip na primer: ADS1015(12 bit) ali še natančnejši ADS1115(16 bit). Komunikacija med Raspberry Pi in MCP3008 poteka po SPI protokolu.
-
-\subsection{SPI}
-SPI(ang. Serial Peripheral Interface bus) je standard za sinhrono serijsko podatkovno povezavo, ki je uporabljena za kratke povezave. Najpogosteje je uporabljena v vgrajenih sistemih. Standard je bil razvit leta 1980, razvila pa ga je Motorola. Kmalu za tem je postal "de facto" standard. Tipično uporabo SPI vodila lahko zasledimo pri Secure Digital karticah (SD) in pri LCD zaslonih. Naprave ki uporabljajo SPI protokol, komunicirajo med seboj v dvosmernem načinu(full duplex), s principom nadrejenega/podrejenega(master/slave), z enim nadrejenim(master) in možnostjo več podrejenih(slave), katere nadrejeni izbira preko SS vodila. Včasih SPI-ju rečemo kar štiri žično serijsko vodilo, ker za svojo delovanje uporablja štiri žice.
-
-\begin{itemize}
-\item MOSI: MOSI priklop je uporabljen za prenos podatkov iz SPI modula, ko je nastavljen kot nadrejeni in za sprejem podatkov ko je nastavljen kot podrejeni.
-\item MISO: MISO priklop je uporabljen za prenos podatkov iz SPI modula, ko je nastavljen kot podrejeni in za sprejem podatkov ko je nastavljenkot nadrejeni.
-\item SS: This pin is used to output the select signal from the SPI module to another peripheral with which a data transfer is to take place when its configured as a Masterand its used as an input to receive the slave select signal when the SPI is configured as Slave.
-\item SCK: SCK priklop je uporabljen za izhod urinega signala, kateri določa takt prenosa podatkov med nadrejenim/podrejenim.
-\end{itemize}
 
 \subsection{Metode merjenja toka}
 Zazanavanje toka je uporabljeno za izvajanje dveh poglavitih funkcij. Meri se količina toka, ki teče skozi porabnik, kar lahko uporabimo za nadzor porabe in meri se previsok tok oziroma napake. Če tok preseže varne meje, programska ali strojna oprema lahko ustrezno reagira in izklopi delovanje naprave. Za opravljanje meritev toka poznamo veliko načinov:
@@ -541,11 +543,8 @@ This is generally not suitable for current control applications that typically r
 for overcurrent and short circuit protection.
 
 \subsection{Senzor ACS712}
-Senzor ki smo ga mi izbrali je ACS712.
+Senzor ki smo ga izbrali je ACS712.
 
-
-
-SLIKA ČIPA
 
 \begin{figure}[H]
 \begin{center}
@@ -567,9 +566,31 @@ Razlikujejo se v občutljivosti oziroma koliko voltov razlike dobimo na izhodu z
 
 SLIKA MOJIH SENZORJEV
 
-Senzorji, ki smo jih uporabili za izdelavo prototipa smo kupili v obliki modulov(zgoraj omenjen senzor, z vsop otrebno periferijo za takojšnji priklop in uporabo). Senzorji imajo sicer sponko za priklop porabnika, vendar je merjenje vseeno indirektno, saj je senzor galvansko ločen. Zaradi potrebe po reaznju žice porabnika, za priklop senzorja, ta oblika senzorja ni najbolj optimalna za končni izdelek, za izdelavo prototipa pa bo zadostovala.
+Senzorji, ki smo jih uporabili za izdelavo prototipa smo kupili v obliki modulov(zgoraj omenjen senzor, z vso potrebno periferijo za takojšnji priklop in uporabo). Senzorji imajo sicer sponko za priklop porabnika, vendar je merjenje vseeno indirektno, saj je senzor galvansko ločen. Zaradi potrebe po reaznju žice porabnika, za priklop senzorja, ta oblika senzorja ni najbolj optimalna za končni izdelek, za izdelavo prototipa pa bo zadostovala. Na spodnji sliki je senzor, ki je varnajši za priklop.
 
 SLIKA PRIMERNEJŠEGA SENZORJA.
+
+\subsection{Analogno digitalni pretvornik MCP3008}
+MCP3008 je nizkocenovni 8 kanalni 10 bitni analogno digitalni pretvornik. Natančnost tega čipa je podobna čipu uporabljenem na Arduino UNO. V primeru da bi kasneje želeli natančnejše meritve bi morali ta čip zamenjati za natančnejši čip na primer: ADS1015(12 bit) ali še natančnejši ADS1115(16 bit). Komunikacija med Raspberry Pi in MCP3008 poteka po SPI protokolu.
+
+\subsection{SPI}
+SPI(ang. Serial Peripheral Interface bus) je standard za sinhrono serijsko podatkovno povezavo, ki je uporabljena za kratke povezave. Najpogosteje je uporabljena v vgrajenih sistemih. Standard je bil razvit leta 1980, razvila pa ga je Motorola. Kmalu za tem je postal "de facto" standard. Tipično uporabo SPI vodila lahko zasledimo pri Secure Digital karticah (SD) in pri LCD zaslonih. Naprave ki uporabljajo SPI protokol, komunicirajo med seboj v dvosmernem načinu(full duplex), s principom nadrejenega/podrejenega(master/slave), z enim nadrejenim(master) in možnostjo več podrejenih(slave), katere nadrejeni izbira preko SS vodila. Včasih SPI-ju rečemo kar štiri žično serijsko vodilo, ker za svojo delovanje uporablja štiri žice.
+
+\begin{itemize}
+\item MOSI: MOSI priklop je uporabljen za prenos podatkov iz SPI modula, ko je nastavljen kot nadrejeni in za sprejem podatkov ko je nastavljen kot podrejeni.
+\item MISO: MISO priklop je uporabljen za prenos podatkov iz SPI modula, ko je nastavljen kot podrejeni in za sprejem podatkov ko je nastavljenkot nadrejeni.
+\item SS: This pin is used to output the select signal from the SPI module to another peripheral with which a data transfer is to take place when its configured as a Masterand its used as an input to receive the slave select signal when the SPI is configured as Slave.
+\item SCK: SCK priklop je uporabljen za izhod urinega signala, kateri določa takt prenosa podatkov med nadrejenim/podrejenim.
+\end{itemize}
+
+\subsection{Arduino ali Raspberry Pi}
+Arduino je odprtokodna elektronska platforma zgrajena z hardwerom in softwerom ki je lahek za uporabo. Nastal je na inštitutu Ivrea Interaction Design, kot orodje za hitro izdelavo prototipov, namenjen pa je bil za študente brez predhodnega znanja elektrotehnike in programiranja. Kmalu za tem je postal zelo priljubljen in posledično se je začel razvijat. Zmore od enostavnih projektov kot so aktivacija motorja, prižiganje luči, branje senzorja pa do 3D printanja in uporabo v vgrajenih sistemih, uporabljajo ga pa tako začetniki kot tudi profesionalci. Na voljo je več verzij Arduinota, ki pa se razlikujejo predvsem v verziji mikrokontrolerja od katerega je tudi odvisno številov digitalnih in analognih vhodov in izhodov ter ceni, ki znaša od od 20 do 80 evrov. Ker je platforma kot že omenjeno odprtokodna pa seveda lahko dobimo Arduino ploščice pod drugim imenom, z enako funkcionalnostjo za veliko ceneje. Zaradi cene, razširjene uporabe platforme in obsežne dokumentacije, ki je na voljo na spletu, je bil Arduino kandidat za izdelavo naprave za diplomsko nalogo. Kasneje se je izkazalo, da je Raspberry pi nekoliko bolj     primeren.
+
+Kot že omenjeni Arduino je bil Raspberry Pi namenjen promoviranju in učenju osnov računalništva. Vsi modeli Raspberry Pi vsebujejo Broadcom-ov Soc(System on a chip), kateri je zgrajen iz ARM-ovega procesorja (CPU) in grafičnega procesorja GPU. Ure procesorjev so med 700MHz in 1.2GHz, pomnilnik pa varira med 256MB in 1GB RAM. Za shrambo operacijskega sistema je uporabljena Secure Digital (SD) kartica različnih velikosti. Večina ploščic ima med 1 in 4 USB vhodov, HDMI in composit video izhod, 3.5mm audio jack. Nižje razredni vhodi/izhodi so na voljo preko številnih GPIO pinov, ki podpirajo protokole kot na primer I2C. Nekatere ploščice imajo tudi Ethernet port in WIFI ter bluetooth. Deluje na operacijskem sistemu raspbian, ki je Debianova različica linuxove distribucije.
+
+Za razvoj merilnika za naše potrebe, razvojna ploščica Arduino zadostuje vsem zahtevam, zato je bila prva verzija merilnega instrumenta izdelana z Arduino ploščico verzijo Arduino UNO. Arduino je s pomočjo senzorjev uspešno opravljal meritve, vendar je bil nestabilen in sicer pri večkratnem zaporednem pošiljanju requestov na strežnik  je "zmrznil". Ker težave nismo uspeli odpraviti smo zato Arduino zamenjali z Raspberry Pi. Raspberry Pi se je izkazal enostavnejši za uporabo ( naprednejši jezik???? ), vendar smo pri zamenjavi naleteli na novo težavo in sicer Raspberry Pi nima analognih vhodov ( Arduino ima vgrajene analogno digitalne pretvornike na ploščici). Problem smo rešili z uporabo analogno/digitalnega pretvornika MCP3008.
+
+
 
 \subsection{RMS - Root mean square}
 
@@ -600,46 +621,9 @@ SLIKA ENAČBE
 SLIKA KODE IN OBRAZLOŽITEV.
 
 
-\section{Načrtovanje portala}
+\section{Načrtovanje centralne enote}
 \thispagestyle{fancy}
 
-
-\subsection{HTTP protokol}
-The Hypertext Transfer Protocol (HTTP) is an application-level
-   protocol for distributed, collaborative, hypermedia information
-   systems. HTTP has been in use by the World-Wide Web global
-   information initiative since 1990. The first version of HTTP,
-   referred to as HTTP/0.9, was a simple protocol for raw data transfer
-   across the Internet. HTTP/1.0, as defined by RFC 1945 [6], improved
-   the protocol by allowing messages to be in the format of MIME-like
-   messages, containing metainformation about the data transferred and
-   modifiers on the request/response semantics. Dandanes se uporablja
-   HTTP/1.1, ponekod tudi HTTP/2. 
-
-   HTTP defines methods (sometimes referred to as verbs) to indicate the desired action to be performed on the identified resource. What this resource represents, whether pre-existing data or data that is generated dynamically, depends on the implementation of the server. Often, the resource corresponds to a file or the output of an executable residing on the server. The HTTP/1.0 specification[11] defined the GET, POST and HEAD methods and the HTTP/1.1 specification[12] added 5 new methods: OPTIONS, PUT, DELETE, TRACE and CONNECT. By being specified in these documents their semantics are well known and can be depended on. Any client can use any method and the server can be configured to support any combination of methods. If a method is unknown to an intermediate it will be treated as an unsafe and non-idempotent method. There is no limit to the number of methods that can be defined and this allows for future methods to be specified without breaking existing infrastructure. For example, WebDAV defined 7 new methods and RFC 5789 specified the PATCH method.
-
-
-GET
-The GET method requests a representation of the specified resource. Requests using GET should only retrieve data and should have no other effect. (This is also true of some other HTTP methods.)[1] The W3C has published guidance principles on this distinction, saying, "Web application design should be informed by the above principles, but also by the relevant limitations."[13] See safe methods below.
-HEAD
-The HEAD method asks for a response identical to that of a GET request, but without the response body. This is useful for retrieving meta-information written in response headers, without having to transport the entire content.
-POST
-The POST method requests that the server accept the entity enclosed in the request as a new subordinate of the web resource identified by the URI. The data POSTed might be, for example, an annotation for existing resources; a message for a bulletin board, newsgroup, mailing list, or comment thread; a block of data that is the result of submitting a web form to a data-handling process; or an item to add to a database.[14]
-PUT
-The PUT method requests that the enclosed entity be stored under the supplied URI. If the URI refers to an already existing resource, it is modified; if the URI does not point to an existing resource, then the server can create the resource with that URI.[15]
-DELETE
-The DELETE method deletes the specified resource.
-TRACE
-The TRACE method echoes the received request so that a client can see what (if any) changes or additions have been made by intermediate servers.
-OPTIONS
-The OPTIONS method returns the HTTP methods that the server supports for the specified URL. This can be used to check the functionality of a web server by requesting '*' instead of a specific resource.
-CONNECT
-[16] The CONNECT method converts the request connection to a transparent TCP/IP tunnel, usually to facilitate SSL-encrypted communication (HTTPS) through an unencrypted HTTP proxy.[17][18] See HTTP CONNECT tunneling.
-PATCH
-The PATCH method applies partial modifications to a resource.[19]
-All general-purpose HTTP servers are required to implement at least the GET and HEAD methods,[20] and, whenever possible, also the OPTIONS method.[citation needed]
-
-https://tools.ietf.org/html/rfc2616
 
 
 \subsection{Laravel framework}
@@ -669,9 +653,9 @@ BOOK: GETTING STARTED WITH LARAVEL
 \end{itemize}
 
 
-\subsection{strežnik}
+\subsection{Centralna enota}
 
-\subsection{baza}
+\subsection{Podatkovna baza}
 
 \chapter{Izvedba}
 \thispagestyle{fancy}
