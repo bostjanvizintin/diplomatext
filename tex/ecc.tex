@@ -1,6 +1,8 @@
 \documentclass[12pt,a4paper,titlepage,openany]{report}
 \usepackage{zakljucna_FAMNIT_1_stopnja_MA_MEF_2016}
 \usepackage{float}
+\usepackage{multicol}
+
 
 % Glava dokumenta:
 
@@ -250,7 +252,7 @@ Drugi problem je izpad elektrike. V tem primeru se bo merilec izklopil, ob vzpos
 \caption{Diagram aktivnosti za merilec.}\label{slika:ActivityMerilec}
 \end{figure}
 
-
+\newpage
 \subsection{Funkcijske zahteve aplikacije:}
 
 
@@ -473,53 +475,34 @@ Zazanavanje toka je uporabljeno za izvajanje dveh poglavitih funkcij. Meri se ko
 
 \end{itemize}
 
+http://www.vishay.com/docs/30304/currentmeasurement.pdf
+
 Vsaka od metod merjenja ima prednosti in slabosti, ki so ključne ko izbiramo metodo in vrsto zenzorja, ki ga bomo uporabili
 v naši aplikaciji. Metode merjenja so razdeljene v dve glavne kategorije: direktno merjenje in indirektno merjenje.
 Direktno merjenje pomeni, da je senzor oziroma naprava za merjenje toka priključena direkno na izvor pod napetostjo, 
 indirektno merjenje pa pomeni, da je senzor oziroma naprava za merjenje toka nekako ločena od izvora napetosti, 
 kar je lahko ključno za varnost aplikacije.
 
-\subsubsection{Resistive}
+\subsubsection{Resistive:}
 \subsubsection{Current Sense Resistor}
-The resistor is a direct method of current measurement that has the benefit of simplicity and linearity. The current sense resistor
-is placed in line with the current being measured and the resultant current flow causes a small amount of power to be converted
-into heat. This power conversion is what provides the voltage signal. Other than the favorable characteristics of simplicity and
-linearity, the current sense resistor is a cost-effective solution with a stable temperature coefficient of resistance (TCR) of
-< 100 ppm or 0.01  and does not suffer the potential of avalanche multiplication or thermal runaway. Additionally,
-low-resistance (< 1 m is available) metal alloy current sense products offer superior surge performance for reliable protection
-during short circuit and overcurrent events.
+Metoda merjenja toka z upornostjo je enostavna in linearna metoda. Upor na katerm se meri tok, namestimo vzporedno z porabnikom na katerem želimo izmeriti tok.
+Majhen tok poskrbi, da se majhna količina moči pretvori v toploto. Pretvorba moči v toploto poskrbi za napetostni signal. Poleg enostavnosti merjenja, dobrih karakteristik, linearnosti, 
+konstantnim temperaturnim koeficientom upornosti, je metoda merjenja toka z uporanostjo zelo poceni. S to metodo se zavarujemo tudi proti kratkim stikom in premočnim tokom.
 
-\subsubsection{Magnetic}
+\subsubsection{Magnetic:}
 \subsubsection{Current Transformer}
-A current transformer (Fig. 1) provides three key advantages: isolation from line voltage; lossless current measurement; and a
-large signal voltage that can provide noise immunity. This indirect current measurement method requires a changing current -
-such as an AC, transient current, or switched DC - to provide a changing magnetic field that is magnetically coupled into the
-secondary windings. The secondary measurement voltage can be scaled according to the turns ratio between the primary and
-secondary windings. This measurement method is considered “lossless” because the circuit current passes through the copper
-windings with very little resistive losses (Fig. 2). However, a small amount of power is lost due to transformer losses from the
-burden resistor, core losses, and primary and secondary DC resistance.
+Tokovni transformator ima tri ključne prednosti: izolacijo od porabnika, neizgubno tokovno merjenje in velik napetostni signal, ki je neobčutljiv na motnje. Z uporabo te metode lahko merimo izmenične, prehodne ali modulirane enosmerne tokove. Omenjeni tokovi spreminjajo magnetno polje ki se prenese v sekundarno navitje transformatorja. Skalo merjene napetosti na sekundarnem navitju lahko spreminjamo s spremembo razmerja ovojev na primarnem in sekundarnem navitju. Metoda se smatra za neizgubno, saj tok teče po bakrenem navitju z zelo majhno izgubo zaradi upornosti, vendar pa vseeno izgubimonekaj moči zaradi obremenilnega upora, izguba jedra in primarnega in sekundarnega enosmernega upora.
 
 \subsubsection{Rogowski Coil}
-The Rogowski coil (Fig. 3) is similar to a current transformer in that a voltage is induced into a secondary coil that is proportional
-to the current flow through an isolated conductor. The difference is that the Rogowski coil is an air core design as opposed to
-the current transformer that relies upon a high-permeability core, such as a laminated steel, to magnetically couple to a
-secondary winding. The air core design has a lower inductance to provide a faster signal response and very linear signal voltage.
-Because of its design, it is often used as a temporary current measurement method on existing wiring such as a handheld meter.
-This could be considered a lower-cost alternative to the current transformer.
+Metoda z uporabo Rogowske tuljave je podobna metodi z uporabo tokovnega transformatorja v tem, da je napetost inducirana na sekundarnem navitju, ki je proporcionalna toku, ki teče skozi izolirani prevodnik. Razlikujeta se v tem, da jedra pri Rogovski tuljavi ni v nasprotju z tokovnim transformatorjem, kjer je jedro iz železa. Rogowka tuljava ima zaradi tega nižjo induktanco, zaradi česar dosežemo hitrejši odziv signaloc in zelo linearen napetostni signal. Zaradi svojega dizajna je pogosto uporabljea kot začasna metoda za merjenje toka na instrumentih za merjenje toka. Smatramo jo za nižje cenovno alternativo metodi merjenja toka s tokovnim transformatorjem.
 
 \subsubsection{Hall Effect}
-When a current-carrying conductor is placed in a magnetic field (Fig. 4), a difference in potential occurs perpendicular to the
-magnetic field and the direction of current flow. This potential is proportional to the magnitude of the current flow. When there
-is no magnetic field and current flow exists, then there is no difference in potential. However, when a magnetic field and current
-flow exist, the charges interact with the magnetic field causing the current distribution to change, which creates the hall voltage
-(Fig. 5).
-The advantage of hall effect devices is that they are capable of measuring large currents with low power dissipation. However,
-there are numerous drawbacks that can limit their use, such as non-linear temperature drift requiring compensation, limited
-bandwidth, low-range current detection requiring a large offset voltage that can lead to error, susceptibility to external magnetic
-fields, ESD sensitivity, and high cost.
+Ko postavimo porabnik skozi katerega teče tok, v magnetno polje, se pojavi razlika potencialov pravokotno na magnetno polje in na smer v katerga teče tok. Ta potencial je sorazmeren moči toka, ki teče skozi porabnik. Napetost ki jo lahko izmerimo zaradi razlike potencialov imenujemo Hallova napetost. Z napravami, ki uporabljajo Hallov efekt lahko merimo velike toke z majhno izgubo moči. Poleg dobrih lastnosti pa imamo tudi slabe lastnosti, kot so ne linearne meritve pri razlikah temperature (problem rešimo z kompenzacijo), omejena pasovna širina, majhno območje meritev ( problem rešimo z velikim napetostnim zamikom, kar predstavi nova odstopanja), občutljivost na zunanja magnetna polja in visoko ceno.
 
-\subsubsection{Transistor}
+\subsubsection{Transistor:}
 \subsubsection{RDS(ON) - Drain-to-Source On-Resistance}
+
+
 Transistors are considered a “lossless” overcurrent detection method since they are standard control components to the circuit
 design and no further resistance or power dissipating devices are required to provide a control signal. Transistor datasheets
 provide the on-resistance for the drain-to-source (RDS(ON)) with a typical resistance in the m range for power MOSFETs. This
@@ -624,6 +607,15 @@ SLIKA KODE IN OBRAZLOŽITEV.
 \section{Načrtovanje centralne enote}
 \thispagestyle{fancy}
 
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=1\linewidth]{Slike/CentralnaEnota.png}
+\end{center}
+\caption{Centralna enota.}\label{slika:CentralnaEnota}
+\end{figure}
+
+\subsection{Strežnik}
+Strežnik bo služil zgolj za to, da bo centralna enota dostopna zunanjim uporabnikom (uporabniki in merilci) in za povezavo gradnikov, ki se bodo izvajali na njemu.
 
 
 \subsection{Laravel framework}
@@ -650,15 +642,176 @@ BOOK: GETTING STARTED WITH LARAVEL
 
 \begin{itemize}
 \item \textbf{Modularnost:} Laravel je bil zgrajen na več kot 20 različnih knjižnicah in je razdeljen v posamezne module. Ker je močno povezan z composer dependency managerjem, ga lahko zelo enostavno posodobimo.
+
+\item \textbf{Preverljivost:}
+Laravel je bil narejen z namenom enostavnega testiranja. Skupaj s frameworkom, je v paketu veliko metod, ki omogočajo obisk poti iz testov, pregled proizvedenega HTML-ja, zagotavljanje, da se metode izbranih razredov kličejo, impersioniranje autenticiranih uporabnikov...
+
+\item \textbf{Usmerjanje:}
+Laravel nam omogoča veliko fleksibilnosti ko definiramo poti naše aplikacije. Ročno lahko vežemo enostavno anonimno funkcijo na pot z HTTP metodo kot so GET, POST, PUT ali DELETE. Take funkcionalnosti izhajajo iz mikro-frameworkov kot so Sinatra (Ruby) in Silex (PHP). Poleg omenjenega je mogoče tudi priložiti filter različnim funkcijam, ki so izvedene na določenih poteh.
+
+\item \textbf{Upravljanje konfiguracije:}
+Aplikacije se zelo pogosto izvajajo v različnih okoljih, kar pomeni, da bo podatkovna baza ali pa e-pošni strežnik drugačen, različne bojo njihove nastavitve ali pa se bodo napake prikazovale na drugačen način, glede na to v katerem okolju se bo aplikacija izvajala. Laravel poenostavi omenjen problem, tako da, nam dovoljuje definiranje nastavitev za vsako okolje posebej in nato avtomatsko izbere pravilne nastavitve za izbrano okolje.
+
+\item \textbf{Gradnja poizvedb in ORM:}
+Skupaj z Laravelom dobimo metode za enostavno gradnjo poizvedb, ki nam omogočajo izvajanje poizvedb na bazi z uporabo PHP sintakse, kjer namesto pisanja zahtevnih SQL poizvedb, uporabimo enostavne metode. Poleg gradnje poizvedb z Laravelom dobimo metode za objektno relacijsko mapiranje (ORM) in Eloquent, ki so podobne tistim, ki jih najdemo v Ruby on Rails, ki skrbijo za povezavo modelov. Metode za gradnjo poizvedb in ORM so kompatibilne z različnimi podatkovnimi bazami, kot so PostgreSQL, SQLite, MySQL in SQL Server.
+
+\item \textbf{Gradnja shem, migracije in sejanje:}
+Kot veliko ostalih metod, so tudi te podobne tistim v Ruby in Rails. Dovoljujejo nam definiranje sheme podatkovne baze s PHP kodo in omogočajo sledenje spremembam s pomočjo migracij podatkovne bate. Migracije je enostaven način opisa spremembe sheme in kako jo razveljaviti. Sejanje nam dovoljuje enostaven vnos podatkov v podatkovno bazo, npr. po migraciji.
+
+\item \textbf{Tempalte engine:}
+Template engine je deloma podoben Razor predlogi jezika v ASP.NET MVC. V Laravelu se imenuje Blade in je enostaven način s katerim lahko naredimo hierarhično postavitev, s predefiniranimi deli kode, kamor lahko vstavimo dinamično vsebino.
+
+\item \textbf{E-mail:}
+Z razredom ki podpira pošiljanje elektronske pošte, lahko z uporabo popularne knjižnice SwiftMailer enostavno pošiljamo elektronsko pošto tudi z zahtevnimi vsebinami in priponkami.
+
+\item \textbf{Autentikacija:}
+Ker je dandanes autentikacija uporabnikov zelo pogosta funkcionalnost aplikacij, Laravel nudi orodja za registracijo, autentikacijo in celo prepošilljanje pozabljenih gesel uporabnikom.
+
+\item \textbf{Modularnost:}
+Redis: It is an in-memory key-value store that has a reputation for being extremely fast. If you give Laravel a Redis instance that it can connect to, it can use it as a session and general-purpose cache and also give you the possibility to interact with it directly.
+
+\item \textbf{Vrste:}
+Z laravelom lahko uporabljamo različne vrste, kot so Amazon SQS in IronMQ, ki nam omogočajo izvajanje zahtevnih opravil s časovnim zamikom. Zako lahko opravila kot so pošiljanje velikega števila elektronskih sporočil uporabnikom izvajamo v ozadju, namesto, da uporabniki čakajo, da se izvajanje konča.
 \end{itemize}
-
-
-\subsection{Centralna enota}
 
 \subsection{Podatkovna baza}
 
+%\begin{multicols}{2}
+%\begin{itemize}
+%%%
+%\item users
+%\begin{itemize}
+%\item id
+%\item name
+%\item email
+%\item password
+%\item remembertoken
+%\end{itemize}
+%%%
+%\item usererrors
+%\begin{itemize}
+%\item id
+%\item idUser
+%\item idError
+%\item seen
+%\end{itemize}
+%%%
+%\item sensors
+%\begin{itemize}
+%\item id
+%\item hash
+%\item input
+%\item sensorMvPerAmp
+%\item sampleTime
+%\item idMeasurementPoint
+%\end{itemize}
+%%%
+%\item sensorBoxes
+%\begin{itemize}
+%\item hash
+%\item name
+%\item numOfInputs
+%\item idUser
+%\end{itemize}
+%%%
+%\item passwordresets
+%\begin{itemize}
+%\item email
+%\item token
+%\end{itemize}
+%%%
+%\item notifications
+%\begin{itemize}
+%\item id
+%\item idSensor
+%\item idUser
+%\item name
+%\item type
+%\item value
+%\item dateFrom
+%\item dateTo
+%\item active
+%\end{itemize}
+%%%
+%\item migrations
+%\begin{itemize}
+%\item migration
+%\item batch
+%\end{itemize}
+%%%
+%\item measurements
+%\begin{itemize}
+%\item id
+%\item value
+%\item idSensor
+%\end{itemize}
+%%%
+%\item measurementPoints
+%\begin{itemize}
+%\item id
+%\item name
+%\end{itemize}
+%%%%
+%\item errors
+%\begin{itemize}
+%\item id
+%\item number
+%\item name
+%\item description
+%\end{itemize}
+%\end{itemize}
+%\end{multicols}
+
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=1\linewidth]{Slike/ER.png}
+\end{center}
+\caption{ER diagram podatkovne baze.}\label{slika:ER}
+\end{figure}
+
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=1\linewidth]{Slike/DbTabele.png}
+\end{center}
+\caption{Tabele podatkovne baze.}\label{slika:DbTabele}
+\end{figure}
+
 \chapter{Izvedba}
 \thispagestyle{fancy}
+Pri izdelavi aplikacije smo uporabili različna orodja, ki so bila potrebna za izdelavo ali pa so nam olajšala delo.
+
+\subsection{Composer}
+
+https://getcomposer.org/doc/00-intro.md
+
+Composer je orodje za upravljanje z odvisnostmi v PHP-ju. Omogoča nam da določimo knjižnjice, ki jih naš projekt potrebuje in nato avtomatsko poskrbi za njih (namestitve in posodobitve).
+S pomočjo Composerja lahko kreiramo nov Laravel projekt. V našem primeru smo to storili z naslednjim ukazom:
+\newline
+\newline
+\textbf{composer create-project --prefer-dist laravel/laravel ecc}
+\newline
+\newline
+Po namestitvi lahko Laravel projekt zaženemo z naslednjim ukazom:
+\newline
+\newline
+\textbf{php artisan serve}
+
+\subsection{Git}
+
+https://www.atlassian.com/git/tutorials/what-is-version-control
+
+
+
+Version control systems are a category of software tools that help a software team manage changes to source code over time. Version control software keeps track of every modification to the code in a special kind of database. If a mistake is made, developers can turn back the clock and compare earlier versions of the code to help fix the mistake while minimizing disruption to all team members.
+
+\subsection{ssh}
+https://en.wikipedia.org/wiki/Secure\_Shell
+
+Secure Shell (SSH) is a cryptographic network protocol for operating network services securely over an unsecured network.[1] The best known example application is for remote login to computer systems by users.
+
+SSH provides a secure channel over an unsecured network in a client-server architecture, connecting an SSH client application with an SSH server.[2] Common applications include remote command-line login and remote command execution, but any network service can be secured with SSH. The protocol specification distinguishes between two major versions, referred to as SSH-1 and SSH-2.
 
 \chapter{Testiranje}
 \thispagestyle{fancy}
@@ -668,8 +821,7 @@ BOOK: GETTING STARTED WITH LARAVEL
 \thispagestyle{fancy}
 
 
-\subsection{Prijava uporabnika v sistem:}
-\subsection{Registracija uporabnika v sistem:}
+\subsection{Registracija/prijava uporabnika v sistem:}
 \subsection{Vnos novega merilca:}
 \subsection{Urejanje in konfiguracija vnešenih merilcev:}
 \subsection{Pregled porabe električne energije po merilnih mestih z možnostjo različnih filtrov:}
