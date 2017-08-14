@@ -102,6 +102,8 @@ Number of appendices: 1\hspace{0.6cm} Number of appendix pages: 1\hspace{0.8cm}N
 Mentor: Assist. Prof. Peter Rogelj, PhD\vspace{0.5cm}\\
 Keywords: Control of electrical usage, Raspberry pi, web portal\vspace{0.5cm}\\
 {\bf Abstract:}
+
+
 Poraba električne energije v gospodinjstvih narašča in je v letu 2010 znašala približno 3.5 kWh na povprečno gospodinjstvo. Narašča tudi delež gospodinjstev opremljenih z dobrinami, ki za svoje delovanje potrebujejo elektriko. Ker gospodinjstva porabijo tretjino skupne električne energije, bi lahko z majhno spremembo porabe v posameznih gpospodinjstvih veliko vplivali na skupno porabo električne energije, vendar je to veliko enostavneje, če imamo natančen vpogled v porabo posameznih električnih naprav, ki si jih lasti gospodinjstvo. Glavna funkcija sistema bi torej bila nadzor porabe električne energije. V zaključni nalogi smo zato izdelali prototip za opravljanje meritev porabe električne energije na posamzenih uporabnikih, saj dandanes gospodinjstva nimajo natančnega pregleda v porabo električne energije. Sistem je zgrajen iz enostavnega merilca, ki je priključen na posamezne porabnike v gospodinjstvu, ta pa komunicira s centralno enoto. Uporabniki lahko nato preko spletnega portala preverijo porabo električne energije. Meritve se uporabniku prikažejo v obliki grafa in tabele, poleg porabe pa lahko uporabnik nastavi različna opozorila, ki bodo sprožena ob izbranih kriterijih.
 \vspace{0.2cm}
 }}
@@ -160,19 +162,14 @@ Zahvaljujem se mentorju, dr. Petru Roglju, za strokovno pomoč pri izdelavi zakl
 
 \section{Definicija problema}
 \thispagestyle{fancy}
-
-
 Poraba električne energije v gospodinjstvih narašča in je v letu 2010 znašala približno 3.5 kWh na povprečno gospodinjstvo. Narašča tudi delež gospodinjstev opremljenih z dobrinami, ki za svoje delovanje potrebujejo elektriko. Na primer pomivalni stroj, stroj za sušenje perila, mobilni telefon, CD naprave, mikrovalovna pečica ter osebni računalnik. Kljub izboljšanju energetske učinkovitosti nekaterih naprav se poraba elektrike v povprečju ne znižuje, saj število naprav v gospodinjstvih narašča. Ker gospodinjstva porabijo tretjino skupne električne energije(http://shrinkthatfootprint.com/how-do-we-use-electricity), bi lahko z majhno spremembo porabe v posameznih gpospodinjstvih veliko vplivali na skupno porabo električne energije. Gospodinjstva redno prejemajo račune za količino porabljene električne energije vendar uporabniku skupna poraba električne energije ne koristi pri predstavi, kje v gospodijstvu bi lahko porabo omejil. Ideja je torej načrtovati in izdelati tak sistem, ki bi uporabnikom omogočal natančnejši nadzor porabe električne energije in s tem prikazal možnosti zmanjšanja električne energije.
 
 \section{Predlog rešitve}
 \thispagestyle{fancy}
-
-
 Porabo električne energije v gospodinjstvih lahko zmanjšamo, vendar je to veliko enostavneje, če imamo natančen vpogled v porabo posameznih električnih naprav, ki si jih lasti gospodinjstvo. Glavna funkcija sistema bi torej bila nadzor porabe električne energije. Uporabniki bi lahko sami določili merilne točke in tako natačno izmerili porabo električne energije na posameznih merilnih mestih. Točna poraba bi bila nato prikazana za posamezna merilna mesta v obliki grafa. Poleg nadzora porabe, bi si lahko uporabniki določili različna opozorila. Sistem bi jih glede na opozorila opozarjal na preveliko uporabo oziroma na prekoračitev porabe električne energije in imel možnosti izklopa porabnikov v primeru sprožitve opozorila. Za lažjo predstavo o količini porabljene električne energije bi sistem omogočal tudi primerjavo porabe električne energije med seboj podobnimi gospodinjstvi.
 
 \section{Težave}
 \thispagestyle{fancy}
-
 Ena od težav, ki nastopi pri merjenju porabe električne energije je montaža merilcev. Ker povprečno gospodinjstvo ne obvlada elektronike, bi morali biti merilci enostavni za montažo, sicer bi vsako montažo moral opraviti strokovnjak kar bi povečalo stroške in tako odvrnilo zanimanje s strani uporabnikov. Težave nastopijo tudi zaradi velike količine podatkov, ki jih merilne naprave konstantno pošiljajo na strežnik. 
 
 \section{Študija izvedljivosti}
@@ -602,7 +599,7 @@ SLIKA KODE IN OBRAZLOŽITEV.
 \end{figure}
 
 \subsection{Strežnik}
-Strežnik bo služil zgolj za to, da bo centralna enota dostopna zunanjim uporabnikom (uporabniki in merilci) in za povezavo gradnikov, ki se bodo izvajali na njemu.
+Strežnik bo služil za to, da bo centralna enota dostopna zunanjim uporabnikom (uporabniki in merilci) in za povezavo gradnikov, ki se bodo izvajali na njemu.
 
 
 \subsection{Laravel framework}
@@ -610,7 +607,7 @@ Prva beta verzija Laravel 1 frameworka je bila napisana iz nič(od začetka??). 
 
 Zgodnji razvoj Laravel frameworka se je razvijal hitro. Laravel 2 in 3 sta bila izdana novembra 2011 in februarja 2012. Novosti v laravelu 2 in 3 so bili kontrolerji, unit testiranje, command line orodje, inversion of control(Ioc) container, Eloquent relacije in migracije.
 
-Laravel 4 je bil ponovno napisan od nule(začetka???) in je bil izdan maja 2013 v novi strukturi, saj se je v tej točki composer(php's ubiquitous package manager) začel kazati za dober industrijski standard, kar je pokazalo velik potencijal za framework, napisan kot zbirka komponent, ki je bila povezana med seboj s strani kompozerja. Laravel je bil zato razvit kot zbirka komponent pod imenom Illuminate in od te točke naprej ni bil več na voljo kot download, ampak je uporabljal večino komponent od Symfony-ja(še en framework, ki dovoljuje uporabo komponent ostalim) in komponente Illuminate s pomočjo Composerja. Ker je laravel od tedaj naprej uporabljal veliko komponent symfony-ja, je prejemal 6 mesečne posodobitve, saj so sledili posodobitvam symfony-ja. Z izdajo Laravel 4 frameworka, so predstavili tudi vrste, mail komponente, facades, in database seeding.
+Laravel 4 je bil ponovno napisan od nule(začetka???) in je bil izdan maja 2013 v novi strukturi, saj se je v tej točki Composerzačel kazati za dober industrijski standard, kar je pokazalo velik potencijal za framework, napisan kot zbirka komponent, ki je bila povezana med seboj s strani Composerja. Laravel je bil zato razvit kot zbirka komponent pod imenom Illuminate in od te točke naprej ni bil več na voljo kot download, ampak je uporabljal večino komponent od Symfony-ja(še en framework, ki dovoljuje uporabo komponent ostalim) in komponente Illuminate s pomočjo Composerja. Ker je laravel od tedaj naprej uporabljal veliko komponent symfony-ja, je prejemal 6 mesečne posodobitve, saj so sledili posodobitvam symfony-ja. Z izdajo Laravel 4 frameworka, so predstavili tudi vrste, mail komponente, facades, in database seeding.
 
 Laravel 4.3 bi moral biti izdan novembra 2014, vendar so pri razvoju zaradi potrebe po velikih spremembah ugotovili, da ne bodo uspeli izdati nove verzije do omenjenega roka. Laravel 5 je bil zato izdan februarja 2015 z njim pa so prišle novosti kot so nova direktorna struktura, odstranitev helperjev za forme in html, introduction of the contract interfaces, a spate of new views, socialite for social media authentication, elixir for asset compilation, scheduler to simplify cron, dotenv for simplified enironmant management, form requests and a brand new repl(read evaluate print loop)
 
@@ -676,7 +673,7 @@ Z laravelom lahko uporabljamo različne vrste, kot so Amazon SQS in IronMQ, ki n
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width=1\linewidth]{Slike/DbTabele.png}
-\end{center}
+\end{center}§
 \caption{Tabele podatkovne baze.}\label{slika:DbTabele}
 \end{figure}
 
@@ -684,9 +681,11 @@ Z laravelom lahko uporabljamo različne vrste, kot so Amazon SQS in IronMQ, ki n
 \thispagestyle{fancy}
 Pri izdelavi aplikacije smo uporabili različna orodja, ki so bila potrebna za izdelavo ali pa so nam olajšala delo.
 
-\subsection{Composer}
+\subsection{XAMPP}
+XAMPP je odprto-kodno orodje, ki je bilo narejeno za zelo enostavno namestitev in uporabo. Z namestitvijo XAMPP orodja namestimo apache distribucijo ki vsebuje MariaDB, PHP in Perl.
+XAMPP orodje potrebujemo, zato da lahko uporabimo podatkovno bazo (v našem primeru MySQL) na osebnem računalniku. Podatkovna baza MySQL bo po zagonu dostopna na 127.0.0.1 (localhost).
 
-https://getcomposer.org/doc/00-intro.md
+\subsection{Composer}
 
 Composer je orodje za upravljanje z odvisnostmi v PHP-ju. Omogoča nam da določimo knjižnjice, ki jih naš projekt potrebuje in nato avtomatsko poskrbi za njih (namestitve in posodobitve).
 S pomočjo Composerja lahko kreiramo nov Laravel projekt. V našem primeru smo to storili z naslednjim ukazom:
@@ -698,22 +697,17 @@ S pomočjo Composerja lahko kreiramo nov Laravel projekt. V našem primeru smo t
 Po namestitvi lahko Laravel projekt zaženemo z naslednjim ukazom:
 \newline
 \newline
-\textbf{php artisan serve}
+\textbf{php artisan serve --host=192.168.0.100 --port=80}
+\newline
+\newline
+Zgornji ukaz bo zagnal Laravel projekt, ki bo dostopen na naslovu 192.168.0.100, na vratih 80. 
 
 \subsection{Git}
-
-https://www.atlassian.com/git/tutorials/what-is-version-control
-
-
-
-Version control systems are a category of software tools that help a software team manage changes to source code over time. Version control software keeps track of every modification to the code in a special kind of database. If a mistake is made, developers can turn back the clock and compare earlier versions of the code to help fix the mistake while minimizing disruption to all team members.
+Sistem za nadzor verzij je programska oprema, ki pomaga programerjem pri spreminjanju izvorne kode čez čas. Tej sistemi hranijo podatke o vsaki spremembi kode v posebni vrsti podatkovne baze. V našem primeru smo uporabili git predvsem za varnostno kopijo kode in za nadzor verzij.
 
 \subsection{ssh}
-https://en.wikipedia.org/wiki/Secure\_Shell
-
-Secure Shell (SSH) is a cryptographic network protocol for operating network services securely over an unsecured network.[1] The best known example application is for remote login to computer systems by users.
-
-SSH provides a secure channel over an unsecured network in a client-server architecture, connecting an SSH client application with an SSH server.[2] Common applications include remote command-line login and remote command execution, but any network service can be secured with SSH. The protocol specification distinguishes between two major versions, referred to as SSH-1 and SSH-2.
+Secure shell (SSH) je kriptiran mrežni protokol za varno upravljanje z mrežnimi storitvami preko nezaščitenega omrežja. Najbolj pogost primer uporabe je prijava v drugi sistem preko omrežja.
+V našem primeru smo SSH uporabili zgolj za prijavo vi Raspberry pi in za naložitev nove verzije programa. Za omenjen način uporabe raspberry pi smo se odločili, ker je bil dostop do raspberry pi računalnika nemogoč, saj je ta bil prključen na porabnik, na nedostopnem mestu.
 
 \chapter{Testiranje}
 \thispagestyle{fancy}
@@ -742,6 +736,27 @@ SSH provides a secure channel over an unsecured network in a client-server archi
 \subsection{Beleženje porabe:}
 \subsection{Poročanje rezultatov meritev:}
 \subsection{Okrevanje po napaki:}
+
+
+\section{Testiranje natančnosti senzorjev:}
+\thispagestyle{fancy}
+
+Natančnost senzorjev bomo stestirali tako, da bomo z vsakim senzorjem merili kontrolirane vrednosti in jih primerjali z vrednostmi, ki jih bodo pokazali senzorji. Na tak način bomo dobili vpogled v natančnost senzorjev in odstopanje od dejanske vrednosti. Za vsak senzor bomo izmerili tri različne vrednosti: 0 Amperov, srednjo vrednost ter maksimalno vrednost.
+
+
+
+\begin{table}[h!]
+\centering
+ \begin{tabular}{| c || c c | c  c | c c |} 
+ \hline
+ Senzor/meritve &  Merjen tok & Senzor & Merjen tok & Senzor3 & Merjen tok  & Senzor\\ [0.5ex] 
+ \hline\hline
+ 5A & 0 & 87837 & 2.5 & Col3 & 5 & Col3 \\ 
+ 20A & 0 & 78 & 10 & Col3 & 10 & Col3 \\
+ 30A & 0 & 778 & 15 & Col3 & 15 & Col3\\[1ex] 
+ \hline
+ \end{tabular}
+\end{table}
 
 
 \chapter{Zaključek}
@@ -868,8 +883,8 @@ SSH provides a secure channel over an unsecured network in a client-server archi
 \bibitem{SPI}
 \spletniVirZAvtorjem
     {Motorola, Inc.}
-    {SPI block guide V03.06}
-    {https://web.archive.org/web/20150413003534/http://www.ee.nmt.edu/~teare/ee308l/datasheets/S12SPIV3.pdf}
+    {SPI block guide V02.06}
+    {http://www.eng.ox.ac.uk/~labejp/Robots/DataSheets/HCS12/S12SPIV2.pdf}
     {25}{6}{2017}
 
 
@@ -917,6 +932,36 @@ SSH provides a secure channel over an unsecured network in a client-server archi
     {Getting started with laravel 4}
    {Packt Publishing}
    {2014}{1. poglavje}
+
+\bibitem{XAMPP}
+\spletniVirZAvtorjem
+    {Apache friends}
+    {XAMPP}
+    {https://www.apachefriends.org/index.html}
+    {10}{7}{2017}
+
+\bibitem{COMPOSER}
+\spletniVirZAvtorjem
+    {composer}
+    {Composer}
+    {https://getcomposer.org/doc/00-intro.md}
+    {2}{4}{2017}
+
+\bibitem{GIT}
+\spletniVirZAvtorjem
+    {git}
+    {GIT}
+    {https://git-scm.com/}
+    {5}{4}{2017}
+
+\bibitem{SSH}
+\spletniVirZAvtorjem
+    {secure shell}
+    {Secure Shell}
+    {https://en.wikipedia.org/wiki/Secure\_Shell}
+    {1}{7}{2017}
+
+
 
 
 % Ena vrstica mora biti tu prazna zaradi pravilnih navedb na strani, kjer so reference citirane.
