@@ -1,6 +1,7 @@
 \documentclass[12pt,a4paper,titlepage,openany]{report}
 \usepackage{zakljucna_FAMNIT_1_stopnja_MA_MEF_2016}
 \usepackage{float}
+\usepackage{multicol}
 
 % Glava dokumenta:
 
@@ -78,7 +79,7 @@ Mentor: doc. dr. Peter Rogelj\vspace{0.5cm}\\
 Ključne besede: Nadzor porabe električne energije, Raspberry pi, spletni portal\vspace{0.5cm}\\
 Math.~Subj.~Class.~(2010):\vspace{0.5cm}\\
 {\bf Izvleček:}\\
-Poraba električne energije v gospodinjstvih narašča in je v letu 2010 znašala približno 3.5 kWh na povprečno gospodinjstvo. Narašča tudi delež gospodinjstev opremljenih z dobrinami, ki za svoje delovanje potrebujejo elektriko. Ker gospodinjstva porabijo tretjino skupne električne energije, bi lahko z majhno spremembo porabe v posameznih gpospodinjstvih veliko vplivali na skupno porabo električne energije, vendar je to veliko enostavneje, če imamo natančen vpogled v porabo posameznih električnih naprav, ki si jih lasti gospodinjstvo. Glavna funkcija sistema bi torej bila nadzor porabe električne energije. V zaključni nalogi smo zato izdelali prototip za opravljanje meritev porabe električne energije na posamzenih uporabnikih, saj dandanes gospodinjstva nimajo natančnega pregleda v porabo električne energije. Sistem je zgrajen iz enostavnega merilca, ki je priključen na posamezne porabnike v gospodinjstvu, ta pa komunicira s centralno enoto. Uporabniki lahko nato preko spletnega portala preverijo porabo električne energije. Meritve se uporabniku prikažejo v obliki grafa in tabele, poleg porabe pa lahko uporabnik nastavi različna opozorila, ki bodo sprožena ob izbranih kriterijih.
+Poraba električne energije v gospodinjstvih narašča in je v letu 2015 znašala približno 10.812 kWh na povprečno gospodinjstvo. Narašča tudi delež gospodinjstev opremljenih z dobrinami, ki za svoje delovanje potrebujejo elektriko. Ker gospodinjstva porabijo tretjino skupne električne energije, bi lahko z majhno spremembo porabe v posameznih gpospodinjstvih veliko vplivali na skupno porabo električne energije, vendar je to veliko enostavneje, če imamo natančen vpogled v porabo posameznih električnih naprav, ki si jih lasti gospodinjstvo. Glavna funkcija sistema bi torej bila nadzor porabe električne energije. V zaključni nalogi smo zato izdelali prototip za opravljanje meritev porabe električne energije na posamzenih uporabnikih, saj dandanes gospodinjstva nimajo natančnega pregleda v porabo električne energije. Sistem je zgrajen iz enostavnega merilca, ki je priključen na posamezne porabnike v gospodinjstvu, ta pa komunicira s centralno enoto. Uporabniki lahko nato preko spletnega portala preverijo porabo električne energije. Meritve se uporabniku prikažejo v obliki grafa in tabele, poleg porabe pa lahko uporabnik nastavi različna opozorila, ki bodo sprožena ob izbranih kriterijih.
 \vspace{0.2cm}
 }}
 \end{center}
@@ -104,7 +105,7 @@ Keywords: Control of electrical usage, Raspberry pi, web portal\vspace{0.5cm}\\
 {\bf Abstract:}
 
 
-Poraba električne energije v gospodinjstvih narašča in je v letu 2010 znašala približno 3.5 kWh na povprečno gospodinjstvo. Narašča tudi delež gospodinjstev opremljenih z dobrinami, ki za svoje delovanje potrebujejo elektriko. Ker gospodinjstva porabijo tretjino skupne električne energije, bi lahko z majhno spremembo porabe v posameznih gpospodinjstvih veliko vplivali na skupno porabo električne energije, vendar je to veliko enostavneje, če imamo natančen vpogled v porabo posameznih električnih naprav, ki si jih lasti gospodinjstvo. Glavna funkcija sistema bi torej bila nadzor porabe električne energije. V zaključni nalogi smo zato izdelali prototip za opravljanje meritev porabe električne energije na posamzenih uporabnikih, saj dandanes gospodinjstva nimajo natančnega pregleda v porabo električne energije. Sistem je zgrajen iz enostavnega merilca, ki je priključen na posamezne porabnike v gospodinjstvu, ta pa komunicira s centralno enoto. Uporabniki lahko nato preko spletnega portala preverijo porabo električne energije. Meritve se uporabniku prikažejo v obliki grafa in tabele, poleg porabe pa lahko uporabnik nastavi različna opozorila, ki bodo sprožena ob izbranih kriterijih.
+Poraba električne energije v gospodinjstvih narašča in je v letu 2015 znašala približno 10.812  kWh na povprečno gospodinjstvo. Narašča tudi delež gospodinjstev opremljenih z dobrinami, ki za svoje delovanje potrebujejo elektriko. Ker gospodinjstva porabijo tretjino skupne električne energije, bi lahko z majhno spremembo porabe v posameznih gpospodinjstvih veliko vplivali na skupno porabo električne energije, vendar je to veliko enostavneje, če imamo natančen vpogled v porabo posameznih električnih naprav, ki si jih lasti gospodinjstvo. Glavna funkcija sistema bi torej bila nadzor porabe električne energije. V zaključni nalogi smo zato izdelali prototip za opravljanje meritev porabe električne energije na posamzenih uporabnikih, saj dandanes gospodinjstva nimajo natančnega pregleda v porabo električne energije. Sistem je zgrajen iz enostavnega merilca, ki je priključen na posamezne porabnike v gospodinjstvu, ta pa komunicira s centralno enoto. Uporabniki lahko nato preko spletnega portala preverijo porabo električne energije. Meritve se uporabniku prikažejo v obliki grafa in tabele, poleg porabe pa lahko uporabnik nastavi različna opozorila, ki bodo sprožena ob izbranih kriterijih.
 \vspace{0.2cm}
 }}
 \end{center}
@@ -141,8 +142,9 @@ Zahvaljujem se mentorju, dr. Petru Roglju, za strokovno pomoč pri izdelavi zakl
 \chapter*{Seznam kratic}
 \thispagestyle{fancyplain}
 \begin{longtable}{@{}p{1cm}@{}p{\dimexpr\textwidth-1cm\relax}@{}}
-\nomenclature{$tj.$}{to je}
-\nomenclature{$npr.$}{na primer}
+\nomenclature{$kWh$}{kilovat ura}
+\nomenclature{$RMS$}{root mean square}
+\nomenclature{$RMS$}{root mean square}
 \end{longtable}
 \newpage
 
@@ -162,19 +164,17 @@ Zahvaljujem se mentorju, dr. Petru Roglju, za strokovno pomoč pri izdelavi zakl
 
 \section{Definicija problema}
 \thispagestyle{fancy}
-Poraba električne energije v gospodinjstvih narašča in je v letu 2010 znašala približno 3.5 kWh na povprečno gospodinjstvo. Narašča tudi delež gospodinjstev opremljenih z dobrinami, ki za svoje delovanje potrebujejo elektriko. Na primer pomivalni stroj, stroj za sušenje perila, mobilni telefon, CD naprave, mikrovalovna pečica ter osebni računalnik. Kljub izboljšanju energetske učinkovitosti nekaterih naprav se poraba elektrike v povprečju ne znižuje, saj število naprav v gospodinjstvih narašča. Ker gospodinjstva porabijo tretjino skupne električne energije(http://shrinkthatfootprint.com/how-do-we-use-electricity), bi lahko z majhno spremembo porabe v posameznih gpospodinjstvih veliko vplivali na skupno porabo električne energije. Gospodinjstva redno prejemajo račune za količino porabljene električne energije vendar uporabniku skupna poraba električne energije ne koristi pri predstavi, kje v gospodijstvu bi lahko porabo omejil. Ideja je torej načrtovati in izdelati tak sistem, ki bi uporabnikom omogočal natančnejši nadzor porabe električne energije in s tem prikazal možnosti zmanjšanja električne energije.
+Poraba električne energije v gospodinjstvih narašča in je v letu 2015 znašala približno 10.812  kWh na povprečno gospodinjstvo.\cite{ElectricityConsumption} Narašča tudi delež gospodinjstev opremljenih z dobrinami, ki za svoje delovanje potrebujejo elektriko. Na primer pomivalni stroj, stroj za sušenje perila, mobilni telefon, CD naprave, mikrovalovna pečica ter osebni računalnik. Kljub izboljšanju energetske učinkovitosti nekaterih naprav se poraba elektrike v povprečju ne znižuje, saj število naprav v gospodinjstvih narašča. Ker gospodinjstva porabijo tretjino skupne električne energije, bi lahko z majhno spremembo porabe v posameznih gpospodinjstvih veliko vplivali na skupno porabo električne energije. Gospodinjstva redno prejemajo račune za količino porabljene električne energije vendar uporabniku skupna poraba električne energije ne koristi pri predstavi, kje v gospodijstvu bi lahko porabo omejil. Ideja je torej načrtovati in izdelati tak sistem, ki bi uporabnikom omogočal natančnejši nadzor porabe električne energije in s tem prikazal možnosti zmanjšanja električne energije.
 
 \section{Predlog rešitve}
 \thispagestyle{fancy}
 Porabo električne energije v gospodinjstvih lahko zmanjšamo, vendar je to veliko enostavneje, če imamo natančen vpogled v porabo posameznih električnih naprav, ki si jih lasti gospodinjstvo. Glavna funkcija sistema bi torej bila nadzor porabe električne energije. Uporabniki bi lahko sami določili merilne točke in tako natačno izmerili porabo električne energije na posameznih merilnih mestih. Točna poraba bi bila nato prikazana za posamezna merilna mesta v obliki grafa. Poleg nadzora porabe, bi si lahko uporabniki določili različna opozorila. Sistem bi jih glede na opozorila opozarjal na preveliko uporabo oziroma na prekoračitev porabe električne energije in imel možnosti izklopa porabnikov v primeru sprožitve opozorila. Za lažjo predstavo o količini porabljene električne energije bi sistem omogočal tudi primerjavo porabe električne energije med seboj podobnimi gospodinjstvi.
 
-\section{Težave}
-\thispagestyle{fancy}
-Ena od težav, ki nastopi pri merjenju porabe električne energije je montaža merilcev. Ker povprečno gospodinjstvo ne obvlada elektronike, bi morali biti merilci enostavni za montažo, sicer bi vsako montažo moral opraviti strokovnjak kar bi povečalo stroške in tako odvrnilo zanimanje s strani uporabnikov. Težave nastopijo tudi zaradi velike količine podatkov, ki jih merilne naprave konstantno pošiljajo na strežnik. 
-
 \section{Študija izvedljivosti}
 \thispagestyle{fancy}
+Ena od težav, ki nastopi pri merjenju porabe električne energije je montaža merilcev. Ker povprečno gospodinjstvo ne obvlada elektronike, bi morali biti merilci enostavni za montažo, sicer bi vsako montažo moral opraviti strokovnjak kar bi povečalo stroške in tako odvrnilo zanimanje s strani uporabnikov. Do težav pridemo tudi, če bi želeli meriti porabnike, ki za svoje napajanje uporabljajo PWM, saj bi pri takih meritvah lahko prišlo do večjih odstopanj, ker napetosti pri teh uporabnikih varira. Težavo lahko rešimo tako, da bi na vsakem porabniku merili poleg toka tudi napetost. Težave nastopijo tudi zaradi velike količine podatkov, ki jih merilne naprave konstantno pošiljajo na strežnik. Hranjenje starih meritev bo zato treba nekako omejiti. 
 
+Pri izdelavi merilca in portala ne bo prišlo do velikih stroškov, vsi nastali stroški pa bodo upravičeni s pridobitvijo diplome in z izdelkom, ki bo upraben za nadzor porabe električne energije. Poleg tega pa bo material uporabljen pri izdelavi, uporaben tudi za nadalnje projekte.
 
 \chapter{Analiza in definiranje zahtev}
 \thispagestyle{fancy}
@@ -203,7 +203,7 @@ Funkcije sistema bodo enake za vse uporabnike z razliko, da bodo imeli osnovni u
 
 \section{Funkcijske zahteve}
 \thispagestyle{fancy}
-
+Funkcijske zahteve bomo razdelili na dva dela: funkcijske zahteve merilca in fuknkcijske zahteve aplikacije. Pri funkcijskih zahtevah aplikacije bomo opisali tisti del sistema ki zajema interakcijo uporabnika s sistemom (v nadaljevanju bomo ta del sistema imenovali "spetni portal").
 
 \subsection{Funkcijske zahteve merilca:}
 
@@ -237,7 +237,7 @@ Drugi problem je izpad elektrike. V tem primeru se bo merilec izklopil, ob vzpos
 \end{figure}
 
 \newpage
-\subsection{Funkcijske zahteve aplikacije:}
+\subsection{Funkcijske zahteve spletnega portala:}
 
 
 
@@ -365,14 +365,8 @@ Na portalu bomo po pritisku gumba za pregled opozoril preusmerjeni na stran, kje
 \caption{Pregled opozoril in napak.}\label{slika:PregledOpozorilInNapak}
 \end{figure}
 
-
-\subsubsection{Nadgradnja uporabnika v nadgrajenega uporabnika:}
-
-????????????????????
-
 \subsubsection{Pregled navodil za uporabo:}
-
-Na portalu bomo po pritisku gumba za navodila preusmerjeni na stran kjer bojo zapisana navodila za priklop senzorja, razne informacije in opisi možnih nastavitev senzorjev ter opis uporabe spletnega portala.
+Na portalu bomo po pritisku gumba za navodilaž preusmerjeni na stran kjer bojo zapisana navodila za priklop senzorja, razne informacije in opisi možnih nastavitev senzorjev ter opis uporabe spletnega portala.
 
 \section{Nefunkcijske zahteve}
 \thispagestyle{fancy}
@@ -393,7 +387,7 @@ Pri uporabi merilca moramo biti pozorni na dve stvar, ki predstavljajo problem z
 \begin{itemize}
 \item Visoka napetost
 
-Na največji problem pri varnosti naletimo pri priklopu merilca na posamezne porabnike. Ker uporabljamo senzor, ki za svoje delovanje zahteva direkten priklop na porabnike, lahko pri priklopu pridemo v neposreden stik z električno napetostjo, kar je lahko usodno. Problem je torej da mora uporabnik prerezato žico, odstranit izolacijo in porabnik priključiti v senzor. Problem lahko delno rešimo z uporabo drugačnih senzorjev, na primer senzorji ki za svoje delovanje ne potrebujejo direktnega priklopa. En primer je ZGORAJ OMENJENI SENZOR, ki za svoje delovanje potrebuje samo žico porabnika, ki je speljana skozi tuljavico. Nevarnost za neposreden stik bi s takim senzorjem nekoliko zmnjšali, vendar še vedno obstaja nevarnost, zato bi uporabnikom brez znanja na tem področju, merilno napravo moral namestiti strokovnjak. Za priklope na enostavnejše porabnike pa bi izdelali senzorje ki bi bili vgrajeni v "adapter" za električne vtičnice ali celo razdelilce.
+Na največji problem pri varnosti naletimo pri priklopu merilca na posamezne porabnike. Ker uporabljamo senzor, ki za svoje delovanje zahteva direkten priklop na porabnike, lahko pri priklopu pridemo v neposreden stik z električno napetostjo, kar je lahko usodno. Problem je torej da mora uporabnik prerezato žico, odstranit izolacijo in porabnik priključiti v senzor. Problem lahko delno rešimo z uporabo drugačnih senzorjev, na primer senzorji ki za svoje delovanje ne potrebujejo direktnega priklopa. En primer je REF ZGORAJ OMENJENI SENZOR, ki za svoje delovanje potrebuje samo žico porabnika, ki je speljana skozi tuljavico. Nevarnost za neposreden stik bi s takim senzorjem nekoliko zmnjšali, vendar še vedno obstaja nevarnost, zato bi uporabnikom brez znanja na tem področju, merilno napravo moral namestiti strokovnjak. Za priklope na enostavnejše porabnike pa bi izdelali senzorje ki bi bili vgrajeni v "adapter" za električne vtičnice ali celo razdelilce.
 
 \item Varovanje podatkov
 
@@ -410,18 +404,16 @@ Cena merilca mora biti ugodna, saj je glavna ideja sistema znižanje stroškov p
 
 Velikost merilca je pomembna saj mora biti merilec prenosljiv, zato da ga lahko uporabnik uporablja na željenih mestih. Velikost merilca igra vlogo tudi zaradi možnosti montaže na mesta, ki niso bila izdelana z namenom proklopa dodatne opreme npr. škatla z varovalkami. 
 
-\subsection{Nefunkcijshe zahteve aplikacije:}
+\subsection{Nefunkcijske zahteve aplikacije:}
 
 
 \subsubsection{Registracija/prijava uporabnika v sistem:}
 
 Sistem mora podpirati registracijo novih uporabnikov in prijavo že registriranih uporabnikov, zaradi varovanja podatkov in pa tudi zaradi shrambe nastavitev merilcev, saj mora sistem vedeti katere nastavitve spadajo k določenemu senzorju.
 
-
-
 \chapter{Načrtovanje sistema}
 \thispagestyle{fancy}
-
+Pri načrtovanju sistema bomo celoten sistem razdelili v dve enoti: merilec in centralno enoto.
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width=1\linewidth]{Slike/NacrtSistema.png}
@@ -431,6 +423,7 @@ Sistem mora podpirati registracijo novih uporabnikov in prijavo že registrirani
 
 \section{Načrtovanje merilca}
 \thispagestyle{fancy}
+Pri načrtovanju merilca bomo opisali metode merjenja, senzorje za opravljanje meritev, analogno digitalni pretvornik, sistem arduino in raspberry pi, efektivno vrednost in hitrtost vzorčena. To je del sistema, ki bo odgovoren za pridobivanje meritev.
 
 \subsection{Metode merjenja toka}
 Zazanavanje toka je uporabljeno za izvajanje dveh poglavitih funkcij. Meri se količina toka, ki teče skozi porabnik, kar lahko uporabimo za nadzor porabe in meri se previsok tok oziroma napake. Če tok preseže varne meje, programska ali strojna oprema lahko ustrezno reagira in izklopi delovanje naprave. Za opravljanje meritev toka poznamo veliko načinov:
@@ -463,9 +456,9 @@ http://www.vishay.com/docs/30304/currentmeasurement.pdf
 
 Vsaka od metod merjenja ima prednosti in slabosti, ki so ključne ko izbiramo metodo in vrsto zenzorja, ki ga bomo uporabili
 v naši aplikaciji. Metode merjenja so razdeljene v dve glavne kategorije: direktno merjenje in indirektno merjenje.
-Direktno merjenje pomeni, da je senzor oziroma naprava za merjenje toka priključena direkno na izvor pod napetostjo, 
+Direktno merjenje pomeni, da je  senzor oziroma naprava za merjenje toka priključena direkno na izvor pod napetostjo, 
 indirektno merjenje pa pomeni, da je senzor oziroma naprava za merjenje toka nekako ločena od izvora napetosti, 
-kar je lahko ključno za varnost aplikacije.
+kar je lahko ključno za varnost aplikacije. \cite{ComponrentsAndMethodsForCurrentMeasurement}
 
 \subsubsection{Resistive:}
 \subsubsection{Current Sense Resistor}
@@ -478,15 +471,13 @@ konstantnim temperaturnim koeficientom upornosti, je metoda merjenja toka z upor
 Tokovni transformator ima tri ključne prednosti: izolacijo od porabnika, neizgubno tokovno merjenje in velik napetostni signal, ki je neobčutljiv na motnje. Z uporabo te metode lahko merimo izmenične, prehodne ali modulirane enosmerne tokove. Omenjeni tokovi spreminjajo magnetno polje ki se prenese v sekundarno navitje transformatorja. Skalo merjene napetosti na sekundarnem navitju lahko spreminjamo s spremembo razmerja ovojev na primarnem in sekundarnem navitju. Metoda se smatra za neizgubno, saj tok teče po bakrenem navitju z zelo majhno izgubo zaradi upornosti, vendar pa vseeno izgubimonekaj moči zaradi obremenilnega upora, izguba jedra in primarnega in sekundarnega enosmernega upora.
 
 \subsubsection{Rogowski Coil}
-Metoda z uporabo Rogowske tuljave je podobna metodi z uporabo tokovnega transformatorja v tem, da je napetost inducirana na sekundarnem navitju, ki je proporcionalna toku, ki teče skozi izolirani prevodnik. Razlikujeta se v tem, da jedra pri Rogovski tuljavi ni v nasprotju z tokovnim transformatorjem, kjer je jedro iz železa. Rogowka tuljava ima zaradi tega nižjo induktanco, zaradi česar dosežemo hitrejši odziv signaloc in zelo linearen napetostni signal. Zaradi svojega dizajna je pogosto uporabljea kot začasna metoda za merjenje toka na instrumentih za merjenje toka. Smatramo jo za nižje cenovno alternativo metodi merjenja toka s tokovnim transformatorjem.
+Metoda z uporabo Rogowske tuljave je podobna metodi z uporabo tokovnega transformatorja v tem, da je napetost inducirana na sekundarnem navitju, ki je proporcionalna toku, ki teče skozi izolirani prevodnik. Razlikujeta se v tem, da jedra pri Rogovski tuljavi ni v nasprotju z tokovnim transformatorjem, kjer je jedro iz železa. Rogowka tuljava ima zaradi tega nižjo induktivnost, zaradi česar dosežemo hitrejši odziv signalov in zelo linearen napetostni signal. Zaradi svojega dizajna je pogosto uporabljea kot začasna metoda za merjenje toka na instrumentih za merjenje toka. Smatramo jo za nižje cenovno alternativo metodi merjenja toka s tokovnim transformatorjem.
 
 \subsubsection{Hall Effect}
 Ko postavimo porabnik skozi katerega teče tok, v magnetno polje, se pojavi razlika potencialov pravokotno na magnetno polje in na smer v katerga teče tok. Ta potencial je sorazmeren moči toka, ki teče skozi porabnik. Napetost ki jo lahko izmerimo zaradi razlike potencialov imenujemo Hallova napetost. Z napravami, ki uporabljajo Hallov efekt lahko merimo velike toke z majhno izgubo moči. Poleg dobrih lastnosti pa imamo tudi slabe lastnosti, kot so ne linearne meritve pri razlikah temperature (problem rešimo z kompenzacijo), omejena pasovna širina, majhno območje meritev ( problem rešimo z velikim napetostnim zamikom, kar predstavi nova odstopanja), občutljivost na zunanja magnetna polja in visoko ceno.
 
 \subsubsection{Transistor:}
 \subsubsection{RDS(ON) - Drain-to-Source On-Resistance}
-
-
 Transistors are considered a “lossless” overcurrent detection method since they are standard control components to the circuit
 design and no further resistance or power dissipating devices are required to provide a control signal. Transistor datasheets
 provide the on-resistance for the drain-to-source (RDS(ON)) with a typical resistance in the m range for power MOSFETs. This
@@ -559,7 +550,7 @@ Za razvoj merilnika za naše potrebe, razvojna ploščica Arduino zadostuje vsem
 
 
 
-\subsection{RMS - Root mean square}
+\subsection{Efektivna vrednost - RMS (root mean square)}
 
 Za določeno število vrednosti n diskretne porazdelitve xi, ..., xn, root mean square (krajše RMS, včasih imenovan tudi
 quadratic mean), je kvadratni koren povprečja vrednosti vseh xi na kvadrat.
@@ -590,12 +581,13 @@ SLIKA KODE IN OBRAZLOŽITEV.
 
 \section{Načrtovanje centralne enote}
 \thispagestyle{fancy}
+Pri načrtovanju centralne enote bomo opisali drugi del sistema ki bo skrbel za poslovno logiko in prikaz podatkov uporabniku. Opisali bomo strežnik, laravel ogrodje in podatkovno bazo.
 
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width=1\linewidth]{Slike/CentralnaEnota.png}
 \end{center}
-\caption{Centralna enota.}\label{slika:CentralnaEnota}
+\caption{ Bločna shema centralne enote.}\label{slika:CentralnaEnota}
 \end{figure}
 
 \subsection{Strežnik}
@@ -659,23 +651,61 @@ Z laravelom lahko uporabljamo različne vrste, kot so Amazon SQS in IronMQ, ki n
 \end{itemize}
 
 \subsection{Podatkovna baza}
+Podatkovna baza je zelo pomemben del našega sistema saj bo skrbela za shrambo podatkov, ki jih bo merilna enota posredovala strežniku, ta pa jih bo po obdelavi lahko prikazal uporabniku. V nadaljevanju je prikazana zgradba podatkovne baze z relacijskim diagramom in z podatkovnim slovarjem kjer so opisani podatki, ki se hranijo v podatkovni bazi. Iz relacijskega diagrama so razvidna imena podatkov, imena tabel, tipi podatkov in relacije med tabelami, zato bomo v podatkovnem slovarju opisali samo podatke, katerih namen ni razviden iz imena v relacijskem diagramu.
 
 
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[width=1\linewidth]{Slike/ER.png}
+\includegraphics[width=1\linewidth]{Slike/RelationDiagram.png}
 \end{center}
-\caption{ER diagram podatkovne baze.}\label{slika:ER}
+\caption{Relacijski diagram podatkovne baze.}\label{slika:RelationDiagram}
 \end{figure}
 
 
-\begin{figure}[H]
-\begin{center}
-\includegraphics[width=1\linewidth]{Slike/DbTabele.png}
-\end{center}§
-\caption{Tabele podatkovne baze.}\label{slika:DbTabele}
-\end{figure}
+
+\subsection{Podatkovni slovar}
+V podatkovnem slovarju bomo opisali samo podatke, ključne za delovanje naše aplikacije. Podatki kot so "created\_at" ali pa "updated\_at", so avtomatsko dodani s strani Laravel frameworka in so enaki za vse tabele v podatkovni bazi. Prav tako bomo izpustili tabele ki jih Laravel framework doda za delo z migracijami baze in delo z registracijo in prijavo uporabnikov in opise podatkov ki so logični iz samega imena podatka v bazi. 
+
+\subsubsection{Merilci - sensorboxes:}
+\begin{itemize}
+\item hash - primarni ključ merilcev. Razlog za uporabo hash niza je ta, da ostali uporabniki ne morejo simulirati pošiljanje meritev na strežnik s pretvarjanjem svoje identitete.
+\item numOfInputs - število senzorjev, ki so priključeni na merilec. Podatek uporablja merilec pri opravljanju in beleženju meritev.
+\end{itemize}
+
+\subsubsection{Senzorji - sensors:}
+\begin{itemize}
+\item hash - tuji ključ, ki referencira tabelo merilcev
+\item input - mesto na katerega je priključen senzor na merilec. Uporablja ga merilec pri opravljanju in beleženju meritev.
+\item sensorMvpPerAmp - pove nam kakpnega tipa je senzor(5A, 20A ali 30A). Uporablja ga merilec pri opravljanju in beleženju meritev.
+\item sampleTime - časovni iterval s katerim želimo, da merilec opravlja posamezne vzorce meritev.
+\item idMeasurementPoint - tuji ključ, ki referencira tabelo merilnih točk.
+\end{itemize}
+
+\subsubsection{Napake - errors:}
+\begin{itemize}
+\item number - številka napake
+\item description - opis napake
+\end{itemize}
+
+\subsubsection{Napake uporabnika - usererrors:}
+\begin{itemize}
+\item seen - podatek, ki se bo uprabljal pri prikazu napak uporabnikov, da bo razvidno katere napake je uporabnik že videl.
+\end{itemize}
+
+
+\subsubsection{Opozorila - notifications:}
+\begin{itemize}
+\item idSensor -  tuji ključ, ki referencira tabelo senzorjev.
+\item idUser -  tuji ključ, ki referencira tabelo uporabnikov.
+\item type - podatek ki nam pove tip opozorila(1 - opozorilo se bo sprožilo ob prekoračitvi nastavljene vrednosti, 2 - opozorilo se bo sprožilo ko bo seštevek porabe v obdobju prekoračil nastavljeno vrednost )
+\item value - vrednost ob kateri se opozorilo sproži
+\item dateFrom - obdobje za katero opozorilo velja
+\item dateTo - obdobje za katero opozorilo velja
+\item active - podatek, ki pove sistemu ali je opozorilo še veljavno in mora sistem preveriti ali se je opozorilo sprožilo, da javi napako uporabniku.
+\end{itemize}
+
+
 
 \chapter{Izvedba}
 \thispagestyle{fancy}
@@ -859,6 +889,14 @@ Natančnost senzorjev bomo stestirali tako, da bomo z vsakim senzorjem merili ko
  \begin{thebibliography}{99}
 \thispagestyle{fancy}
 
+\bibitem{ElectricityConsumption}
+\spletniVirZAvtorjem
+    {U.S energy information administration}
+    {U.S energy information administration}
+    {https://www.eia.gov/tools/faqs/faq.php?id=97\&t=3}
+    {25}{6}{2017}
+
+
 \bibitem{ComponrentsAndMethodsForCurrentMeasurement}
 \spletniVirZAvtorjem
     {B.~Yarborough}
@@ -964,6 +1002,7 @@ Natančnost senzorjev bomo stestirali tako, da bomo z vsakim senzorjem merili ko
 
 
 
+
 % Ena vrstica mora biti tu prazna zaradi pravilnih navedb na strani, kjer so reference citirane.
 \end{thebibliography}
 \newpage
@@ -992,15 +1031,6 @@ Tu dodamo prvo prilogo.
 % \thispagestyle{empty}
 % mora biti prisoten na vsaki strani priloge (da se ne prikaže glava dokumenta)
 
-\appendices{B Naslov druge priloge}
-\chapter{Naslov druge priloge}
-\thispagestyle{empty}
-Tu dodamo drugo prilogo.
-
-% Pozor:
-% ukaz
-% \thispagestyle{empty}
-% mora biti prisoten na vsaki strani priloge (da se ne prikaže glava dokumenta)
 
 \addtocontents{toc}{\setcounter{tocdepth}{2}}
 \end{document}
